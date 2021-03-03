@@ -14,11 +14,10 @@ var app = new Framework7({
       swipe: 'left',
     },
     // Add default routes
-    routes: [
-      {
-        path: '/about/',
-        url: 'about.html',
-      },
+    routes: [ 
+
+        { path: '/menu-admin/', url: 'menu-admin.html', },
+        { path: '/index/', url: 'index.html', },
     ]
     // ... other parameters
   });
@@ -37,11 +36,23 @@ $$(document).on('page:init', function (e) {
     console.log(e);
 })
 
-// Option 2. Using live 'page:init' event handlers for each page
-$$(document).on('page:init', '.page[data-name="about"]', function (e) {
-    // Do something here when page with data-name="about" attribute loaded and initialized
+
+// Page init correspondiente a la página menu-admin.html
+$$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
+    
     console.log(e);
-    alert('Hello');
+    alert('menu-admin');
+})
+
+// Page init correspondiente a la página index.html
+$$(document).on('page:init', '.page[data-name="index"]', function (e) {
+    
+    console.log(e);
+    
+
+    $$('#btnAdmin').on('click', function(){
+        mainView.router.navigate('/menu-admin/');
+    });
 })
 
 
