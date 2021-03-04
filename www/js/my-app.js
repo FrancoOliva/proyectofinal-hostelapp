@@ -18,7 +18,8 @@ var app = new Framework7({
 
         { path: '/login-admin/', url: 'login-admin.html', },
         { path: '/index/', url: 'index.html', },
-        { path: '/menu-admin/', url: 'menu-admin.html', }
+        { path: '/menu-admin/', url: 'menu-admin.html', },
+        { path: '/crear-usuario/', url: 'crear-usuario.html', }
         
     ]
     // ... other parameters
@@ -60,8 +61,22 @@ $$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
     console.log('Página Login-admin cargada!');
     
     $$('#btnIngresarAdmin').on('click', function(){
-        mainView.router.navigate('/menu-admin/');
-    });
+
+        email = $$('#usuarioAdmin').val();
+        password = $$('#passAdmin').val();
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+          .then((user) => {
+            // Signed in
+            mainView.router.navigate('/menu-admin/');
+            // ...
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+                
+            });
 
 })
 
@@ -71,9 +86,43 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     console.log(e);
     
     
-    console.log('Página menu-admin cargada!');
+    $$('#btnCrearUsuario').on('click', function(){
+        
+        mainView.router.navigate('/crear-usuario/');
+
+    });
 
 })
+
+// Page init correspondiente a la página menu-admin.html
+$$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
+    
+    console.log(e);
+    
+    
+    $$('#cu_btnAceptar').on('click', function(){
+
+        email = $$('#cu_usuario').val();
+        password = $$('#cu_pass').val();
+        
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then((user) => {
+            // Signed in
+            console.log('USUARIO CREADO CORRECTAMENTE. VER FIREBASE!');
+            mainView.router.navigate('/menu-admin/');
+            // ...
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+          });
+
+    });
+
+})
+
+
 
 
 
