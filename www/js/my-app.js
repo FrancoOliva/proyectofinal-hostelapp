@@ -16,8 +16,9 @@ var app = new Framework7({
     // Add default routes
     routes: [ 
 
-        { path: '/menu-admin/', url: 'menu-admin.html', },
-        { path: '/index/', url: 'index.html', },
+        { path: '/login-admin/', url: 'login-admin.html', },
+        { path: '/index/', url: 'index.html', }
+        
     ]
     // ... other parameters
   });
@@ -26,7 +27,9 @@ var mainView = app.views.create('.view-main');
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    console.log("Device is ready!");
+    console.log("Device is ready!");   
+
+    
 
 });
 
@@ -37,23 +40,29 @@ $$(document).on('page:init', function (e) {
 })
 
 
-// Page init correspondiente a la página menu-admin.html
-$$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
+// Page init correspondiente a la página login-admin.html
+$$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
     
     console.log(e);
-    alert('menu-admin');
+    console.log('login-admin.html');
+
+
 })
 
 // Page init correspondiente a la página index.html
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     
     console.log(e);
-    
+    alert('Estoy en el index');
+
 
     $$('#btnAdmin').on('click', function(){
-        mainView.router.navigate('/menu-admin/');
+        mainView.router.navigate('/login-admin/');
     });
+
 })
+
+
 
 
 

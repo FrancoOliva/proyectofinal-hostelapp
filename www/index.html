@@ -10,7 +10,9 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; script-src 'self' 'unsafe-inline';">
+    <!--
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:; ">
+    -->
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
@@ -96,17 +98,13 @@
                       </div>
 
 
-                          <!-- Botón administrador -->
-                      <button class="col button button-outline" id="btnAdmin">Administrador</button>
-                      
-                      
+                        <!-- Botón ingresar -->
+                        <button class="col button button-outline" id="btnIngresar">Ingresar</button>
 
-                      
-                          <!-- Botón ingresar -->
-                      <button class="col button button-outline" id="btnIngresar">Ingresar</button>
-                        
-                      
-                            
+                        <!-- Botón administrador -->
+                        <button class="col button button-outline" id="btnAdmin">Administrador</button>
+                          
+                          
 
 
 
@@ -121,6 +119,7 @@
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
+     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
 
     <script>
     // Your web app's Firebase configuration
@@ -136,6 +135,12 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     </script>
+
+
+    
+
+    
+    
     
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/framework7-bundle.min.js"></script>
