@@ -44,7 +44,10 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
     
     console.log(e);
-    console.log('login-admin.html');
+    
+    alert('login-admin.html');
+    alert('login-admin.html');
+    alert('login-admin.html');
 
 
 })
