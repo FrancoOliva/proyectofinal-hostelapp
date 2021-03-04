@@ -17,7 +17,8 @@ var app = new Framework7({
     routes: [ 
 
         { path: '/login-admin/', url: 'login-admin.html', },
-        { path: '/index/', url: 'index.html', }
+        { path: '/index/', url: 'index.html', },
+        { path: '/menu-admin/', url: 'menu-admin.html', }
         
     ]
     // ... other parameters
@@ -39,24 +40,11 @@ $$(document).on('page:init', function (e) {
     console.log(e);
 })
 
-
-// Page init correspondiente a la página login-admin.html
-$$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
-    
-    console.log(e);
-    
-    alert('login-admin.html');
-    alert('login-admin.html');
-    alert('login-admin.html');
-
-
-})
-
 // Page init correspondiente a la página index.html
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     
     console.log(e);
-    alert('Estoy en el index');
+    console.log('Página index cargada!!');
 
 
     $$('#btnAdmin').on('click', function(){
@@ -64,6 +52,30 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     });
 
 })
+
+// Page init correspondiente a la página login-admin.html
+$$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
+    
+    console.log(e);
+    console.log('Página Login-admin cargada!');
+    
+    $$('#btnIngresarAdmin').on('click', function(){
+        mainView.router.navigate('/menu-admin/');
+    });
+
+})
+
+// Page init correspondiente a la página menu-admin.html
+$$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
+    
+    console.log(e);
+    
+    
+    console.log('Página menu-admin cargada!');
+
+})
+
+
 
 
 
