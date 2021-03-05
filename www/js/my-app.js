@@ -27,6 +27,14 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main');
 
+// inicializar base de datos
+db = firebase.firestore();
+
+// referencia a la colección usuarios en nuestra DB
+coleccion_usuarios = db.collection('usuarios');
+
+
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");   
@@ -41,18 +49,119 @@ $$(document).on('page:init', function (e) {
     console.log(e);
 })
 
+
+
 // Page init correspondiente a la página index.html
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     
     console.log(e);
     console.log('Página index cargada!!');
 
+    
 
-    $$('#btnAdmin').on('click', function(){
-        mainView.router.navigate('/login-admin/');
+    /*
+    var data = {
+        usuario: "usuario@hostelapp.com", 
+        contraseña: "36a623s432as",
+        perfil: "usuario"
+    };
+
+    db.collection("usuarios").doc("usuario@hostelapp.com").set(data)
+    .then(function(docRef) { // .then((docRef) => {
+    console.log("documento cargado ??");
+    })
+    .catch(function(error) { // .catch((error) => {
+    console.log("Error: " + error);
     });
 
+    */
+    
+    $$('#btnIngresar').on('click', function(){
+        
+
+        // autenticación del usuario y contraseña
+        var email = $$('#usuarioLogin').val();
+        var password = $$('#passLogin').val();
+
+        //BASE DE DATOS
+        // Recuperamos usuario para usarlo como ID y recuperar datos de nuestra DB
+        var id_usuario = email;
+        console.log(id_usuario);
+        // Hacemos referencia a un documento utilizando id_usuario
+        var docRef = coleccion_usuarios.doc(id_usuario);
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((user) => {
+            // Signed in
+            // Traemos datos de ese documento que específicamos
+            docRef.get().then((doc) => {
+                if (doc.exists) {
+                    console.log('El documento existe!');
+                    console.log("Document data:", doc.data().perfil);
+                    console.log("Document data:", doc.data().usuario);
+                    console.log("Document data:", doc.data().contraseña);
+
+                    perfil_login = doc.data().perfil;
+
+                    if(perfil_login == 'admin'){
+
+                        console.log('El usuario es un ADMINISTRADOR');
+
+                        } else if(perfil_login == 'usuario'){
+
+                            console.log('El usuario es un USUARIO');
+                    }
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+            // ...
+          })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+
+
+        
+
+
+
+
+        
+
+        
+
+        
+
+
+    });
+
+    
+
+    
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Page init correspondiente a la página login-admin.html
 $$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
@@ -60,23 +169,7 @@ $$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
     console.log(e);
     console.log('Página Login-admin cargada!');
     
-    $$('#btnIngresarAdmin').on('click', function(){
-
-        email = $$('#usuarioAdmin').val();
-        password = $$('#passAdmin').val();
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-          .then((user) => {
-            // Signed in
-            mainView.router.navigate('/menu-admin/');
-            // ...
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-          });
-                
-            });
+    
 
 })
 
@@ -84,13 +177,10 @@ $$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
 $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     
     console.log(e);
+    console.log('Página menu-admin cargada!');
     
     
-    $$('#btnCrearUsuario').on('click', function(){
-        
-        mainView.router.navigate('/crear-usuario/');
-
-    });
+    
 
 })
 
@@ -100,25 +190,7 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
     console.log(e);
     
     
-    $$('#cu_btnAceptar').on('click', function(){
-
-        email = $$('#cu_usuario').val();
-        password = $$('#cu_pass').val();
-        
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then((user) => {
-            // Signed in
-            console.log('USUARIO CREADO CORRECTAMENTE. VER FIREBASE!');
-            mainView.router.navigate('/menu-admin/');
-            // ...
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ..
-          });
-
-    });
+    
 
 })
 
