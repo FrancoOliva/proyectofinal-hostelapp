@@ -16,10 +16,12 @@ var app = new Framework7({
     // Add default routes
     routes: [ 
 
-        { path: '/login-admin/', url: 'login-admin.html', },
+        
         { path: '/index/', url: 'index.html', },
         { path: '/menu-admin/', url: 'menu-admin.html', },
-        { path: '/crear-usuario/', url: 'crear-usuario.html', }
+        { path: '/menu-usuario/', url: 'menu-usuario.html',},
+        { path: '/crear-usuario/', url: 'crear-usuario.html',},
+        { path: '/dar-de-baja/', url: 'dar-de-baja.html', }
         
     ]
     // ... other parameters
@@ -55,9 +57,7 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     
     console.log(e);
-    console.log('Página index cargada!!');
-
-    
+    console.log('Página index cargada!!');    
 
     /*
     var data = {
@@ -92,24 +92,27 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((user) => {
-            // Signed in
+            
             // Traemos datos de ese documento que específicamos
             docRef.get().then((doc) => {
                 if (doc.exists) {
                     console.log('El documento existe!');
-                    console.log("Document data:", doc.data().perfil);
-                    console.log("Document data:", doc.data().usuario);
-                    console.log("Document data:", doc.data().contraseña);
 
                     perfil_login = doc.data().perfil;
 
                     if(perfil_login == 'admin'){
 
-                        console.log('El usuario es un ADMINISTRADOR');
+                        console.log('Perfil: ADMINISTRADOR');
+                        mainView.router.navigate('/menu-admin/');
 
                         } else if(perfil_login == 'usuario'){
 
-                            console.log('El usuario es un USUARIO');
+                            console.log('Perfil: USUARIO');
+                            mainView.router.navigate('/menu-usuario/');
+
+                    } else {
+                        console.log('Usuario dado de baja!');
+                        $$('#mensajeLogin').html('Este usuario fue dado de baja por un administrador.');
                     }
 
                 } else {
@@ -126,58 +129,44 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
             var errorMessage = error.message;
           });
 
-
-        
-
-
-
-
-        
-
-        
-
-        
-
-
     });
 
-    
-
-    
-
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Page init correspondiente a la página login-admin.html
-$$(document).on('page:init', '.page[data-name="login-admin"]', function (e) {
-    
-    console.log(e);
-    console.log('Página Login-admin cargada!');
-    
-    
-
-})
 
 // Page init correspondiente a la página menu-admin.html
 $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     
     console.log(e);
     console.log('Página menu-admin cargada!');
+
+    $$('#btnCrearUsuario').on('click', function(){
+        console.log("Selección: Crear usuario!");
+        mainView.router.navigate('/crear-usuario/');
+    });
+    
+    $$('#btnDarBaja').on('click', function(){
+        console.log("Selección: Dar de baja!");
+        mainView.router.navigate('/dar-de-baja/');
+    });
+
+    $$('#btnAdminRegistrar').on('click', function(){
+        console.log("Selección: Registrar clientes");
+    });
+
+    $$('#btnAdminBuscarClientes').on('click', function(){
+        console.log("Selección: Buscar clientes");
+    });
+
+    $$('#btnAdminRegistrarPago').on('click', function(){
+        console.log("Selección: Registrar un pago!");
+    });
+
+    $$('#btnAdminRegistrarGasto').on('click', function(){
+        console.log("Selección: Registrar un gasto!");
+    });
+
+    
     
     
     
@@ -185,9 +174,91 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 })
 
 // Page init correspondiente a la página menu-admin.html
+$$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
+    
+    console.log(e);
+    console.log('Página menu-usuario cargada!');
+    
+    
+    
+
+})
+
+// Page init correspondiente a la página crear-usuario.html
 $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
     
     console.log(e);
+    
+    $$('#btnAdminAceptar').on('click', function(){
+        
+        var email = $$('#crearUsuario').val();
+        var password = $$('#crearPass').val();
+        var perfil = $$('#crearPerfil').val();
+
+        console.log(email);
+        console.log(password);
+        console.log(perfil);
+
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then((user) => {
+            console.log('Usuario creado correctamente!');
+                // JSON con los datos del usuario que se va a crear
+                var data = {
+                    usuario: email, 
+                    contraseña: password,
+                    perfil: perfil
+                    };
+
+                var id = email;
+
+                db.collection("usuarios").doc(id).set(data)
+                .then(function(docRef) { // .then((docRef) => {
+                    console.log("Documento cargado en la DB correctamente!");
+                })
+                .catch(function(error) { // .catch((error) => {
+                    console.log("Error: " + error);
+                });
+
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ..
+          });
+
+
+    });
+    
+
+})
+
+// Page init correspondiente a la página dar-de-baja.html
+$$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
+    
+    console.log(e);
+    console.log('Página dar-de-baja cargada!');
+
+    $$('#btnAdminDarDeBaja').on('click',function(){
+        
+        // le pedimos al admin que ingrese los datos del usuario que quiere dar de baja
+        
+        var id = $$('#ddbUsuario').val();
+        var act_perfil = $$('#ddbPerfil').val();
+
+        coleccion_usuarios.doc(id).update
+            ({ perfil: act_perfil })
+            .then(function() {
+
+            console.log("Perfil modificado. Usuario dado de baja!");
+
+            })
+            .catch(function(error) {
+
+            console.log("Error: " + error);
+
+            });
+
+    });
     
     
     
