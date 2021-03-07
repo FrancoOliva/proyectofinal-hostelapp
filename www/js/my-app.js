@@ -21,6 +21,7 @@ var app = new Framework7({
         { path: '/menu-admin/', url: 'menu-admin.html', },
         { path: '/menu-usuario/', url: 'menu-usuario.html',},
         { path: '/crear-usuario/', url: 'crear-usuario.html',},
+        { path: '/registrar-cliente/', url: 'registrar-cliente.html',},
         { path: '/dar-de-baja/', url: 'dar-de-baja.html', }
         
     ]
@@ -140,6 +141,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     console.log(e);
     console.log('Página menu-admin cargada!');
 
+    // botones del mneú admin
     $$('#btnCrearUsuario').on('click', function(){
         console.log("Selección: Crear usuario!");
         mainView.router.navigate('/crear-usuario/');
@@ -173,14 +175,18 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
 })
 
-// Page init correspondiente a la página menu-admin.html
+// Page init correspondiente a la página menu-usuario.html
 $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
     
     console.log(e);
     console.log('Página menu-usuario cargada!');
-    
-    
-    
+
+    $$('#btnRegistrarUsuario').on('click', function(){
+        console.log('Selección: registrar usuario.');
+        
+        mainView.router.navigate('/registrar-cliente/');
+    });
+
 
 })
 
@@ -202,6 +208,7 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
           .then((user) => {
             console.log('Usuario creado correctamente!');
+            
                 // JSON con los datos del usuario que se va a crear
                 var data = {
                     usuario: email, 
@@ -258,10 +265,55 @@ $$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
 
             });
 
+    });    
+    
+
+})
+
+// Page init correspondiente a la página registrar-cliente.html
+$$(document).on('page:init', '.page[data-name="registrar-cliente"]', function (e) {
+    
+    console.log(e);
+    console.log('Página registrar-cliente cargada!');
+
+    $$('#btnAceptar').on('click', function(){
+        
+        var nombreCliente = $$('#c_nombre').val();
+        var apellidoCliente = $$('#c_apellido').val();
+        var dni_pasaporteCliente = $$('#c_dnipasaporte').val();
+        var fNacimientoCliente = $$('#c_fNacimiento').val();
+        var paisCliente = $$('#c_pais').val();
+        var ocupacionCliente = $$('#c_ocupación').val();
+        var emailCliente = $$('#c_email').val();
+        var fRegistroCliente = $$('#c_fIngreso').val();
+
+        var data = {
+        nombre: nombreCliente,
+        apellido: apellidoCliente,
+        dni_pasaporte: dni_pasaporteCliente,
+        fNacimiento: fNacimientoCliente,
+        pais: paisCliente,
+        ocupacion: ocupacionCliente,
+        email: emailCliente,
+        fRegistro: fRegistroCliente
+        };
+
+        var id = dni_pasaporteCliente;
+
+        db.collection("clientes").doc(id).set(data)
+        .then(function(docRef) { // .then((docRef) => {
+        console.log("CLIENTE CARGADO EN LA BASE DE DATOS");
+        })
+        .catch(function(error) { // .catch((error) => {
+        console.log("Error: " + error);
+        });
+
+
+
+
     });
-    
-    
-    
+  
+
 
 })
 
