@@ -22,7 +22,8 @@ var app = new Framework7({
         { path: '/menu-usuario/', url: 'menu-usuario.html',},
         { path: '/crear-usuario/', url: 'crear-usuario.html',},
         { path: '/registrar-cliente/', url: 'registrar-cliente.html',},
-        { path: '/dar-de-baja/', url: 'dar-de-baja.html', }
+        { path: '/dar-de-baja/', url: 'dar-de-baja.html', },
+        { path: '/avisos-usuario/', url: 'avisos-usuario.html', }
         
     ]
     // ... other parameters
@@ -35,6 +36,19 @@ db = firebase.firestore();
 
 // referencia a la colección usuarios en nuestra DB
 coleccion_usuarios = db.collection('usuarios');
+
+// perfil del usuario conectado
+var perfil = "";
+
+// página avisos-usuario ID's
+var texto1 = "";
+var texto2 = "";
+
+var btn1 = "";
+var btn2 = "";
+
+var ruta1 = ""
+var ruta2 = ""
 
 
 
@@ -104,30 +118,42 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
                     if(perfil_login == 'admin'){
 
                         console.log('Perfil: ADMINISTRADOR');
+                        perfil = "admin";
                         mainView.router.navigate('/menu-admin/');
 
                         } else if(perfil_login == 'usuario'){
 
                             console.log('Perfil: USUARIO');
+                            perfil = "usuario";
                             mainView.router.navigate('/menu-usuario/');
 
-                    } else {
+                        } else if (perfil_login == "baja"){
                         console.log('Usuario dado de baja!');
                         $$('#mensajeLogin').html('Este usuario fue dado de baja por un administrador.');
-                    }
+                        
+                        } 
 
                 } else {
                     // doc.data() will be undefined in this case
                     console.log("No such document!");
                 }
+
         }).catch((error) => {
             console.log("Error getting document:", error);
         });
             // ...
           })
         .catch((error) => {
+
             var errorCode = error.code;
             var errorMessage = error.message;
+            console.log(errorCode);
+            console.log(errorMessage);
+            if(errorCode == "auth/wrong-password"){
+                $$('#mensajeLogin').html('La contraseña es incorrecta!');
+            } else if (errorCode == "auth/user-not-found"){
+                $$('#mensajeLogin').html('Este usuario no puede ser identificado. Quizás no existe o fue borrado.');
+            }
           });
 
     });
@@ -154,6 +180,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
     $$('#btnAdminRegistrar').on('click', function(){
         console.log("Selección: Registrar clientes");
+        mainView.router.navigate('/registrar-cliente/');
     });
 
     $$('#btnAdminBuscarClientes').on('click', function(){
@@ -168,10 +195,6 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
         console.log("Selección: Registrar un gasto!");
     });
 
-    
-    
-    
-    
 
 })
 
@@ -218,13 +241,32 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
 
                 var id = email;
 
+                // los datos del usuario ingresado en auth se guardan en la db
                 db.collection("usuarios").doc(id).set(data)
                 .then(function(docRef) { // .then((docRef) => {
+                    
                     console.log("Documento cargado en la DB correctamente!");
+
+                    
                 })
                 .catch(function(error) { // .catch((error) => {
                     console.log("Error: " + error);
                 });
+
+                // una vez creado el usuario y guardado en la db
+                // modificar y cargar los datos de avisos-usuario.html
+                
+                texto1 = "Datos guardados";
+                texto2 = "El usuario fue creado con éxito!";
+
+                btn1 = "Crear usuario";
+                btn2 = "Menú principal";
+
+                ruta1 = "/crear-usuario/";
+                ruta2 = "/menu-admin/";          
+
+                mainView.router.navigate('/avisos-usuario/');
+
 
           })
           .catch((error) => {
@@ -233,10 +275,8 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
             // ..
           });
 
-
     });
     
-
 })
 
 // Page init correspondiente a la página dar-de-baja.html
@@ -264,6 +304,17 @@ $$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
             console.log("Error: " + error);
 
             });
+
+            texto1 = "Usuario dado de baja";
+            texto2 = "Este usuario no podrá conectarse de nuevo sin la autorización de un administrador.";
+
+            btn1 = "Dar de baja";
+            btn2 = "Menú principal";
+
+            ruta1 = "/dar-de-baja/"
+            ruta2 = "/menu-admin/"
+
+            mainView.router.navigate('/avisos-usuario/');
 
     });    
     
@@ -308,12 +359,53 @@ $$(document).on('page:init', '.page[data-name="registrar-cliente"]', function (e
         console.log("Error: " + error);
         });
 
+        texto1 = "Datos guardados";
+        texto2 = "El cliente fue cargado con éxito!";
 
+        btn1 = "Crear usuario";
+        btn2 = "Menú principal";
 
+        // las rutas de los botones se definen según el perfil
+        // que esté cargando al nuevo cliente
+        if(perfil == "admin"){
+            ruta1 = "/registrar-cliente/"
+            ruta2 = "/menu-admin/"
+
+            mainView.router.navigate('/avisos-usuario/');
+
+        } else {
+            ruta1 = "/registrar-cliente/"
+            ruta2 = "/menu-usuario/"
+
+            mainView.router.navigate('/avisos-usuario/');
+        }
 
     });
-  
 
+})
+
+// Page init correspondiente a la página avisos-usuario.html
+$$(document).on('page:init', '.page[data-name="avisos-usuario"]', function (e) {
+    
+    console.log(e);
+    console.log('Página avisos-usuario cargada!');
+
+    $$('#texto1').html(texto1);
+    $$('#texto2').html(texto2);
+
+    $$('#btn1').html(btn1);
+    $$('#btn2').html(btn2);
+
+    
+    // botones aceptar y menu principal
+    $$('#btn1').on('click', function(){
+        mainView.router.navigate(ruta1);
+    });
+
+    $$('#btn2').on('click', function(){
+        mainView.router.navigate(ruta2);
+    });
+    
 
 })
 
