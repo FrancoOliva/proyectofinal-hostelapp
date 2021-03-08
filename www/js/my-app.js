@@ -23,7 +23,8 @@ var app = new Framework7({
         { path: '/crear-usuario/', url: 'crear-usuario.html',},
         { path: '/registrar-cliente/', url: 'registrar-cliente.html',},
         { path: '/dar-de-baja/', url: 'dar-de-baja.html', },
-        { path: '/avisos-usuario/', url: 'avisos-usuario.html', }
+        { path: '/avisos-usuario/', url: 'avisos-usuario.html', },
+        { path: '/habitaciones/', url: 'habitaciones.html', }
         
     ]
     // ... other parameters
@@ -208,6 +209,12 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
         console.log('Selección: registrar usuario.');
         
         mainView.router.navigate('/registrar-cliente/');
+    });
+
+    $$('#btnHabitaciones').on('click', function(){
+        console.log('Selección: ver habitaciones.');
+        
+        mainView.router.navigate('/habitaciones/');
     });
 
 
@@ -411,7 +418,25 @@ $$(document).on('page:init', '.page[data-name="avisos-usuario"]', function (e) {
 
 
 
+// Page init correspondiente a la página habitaciones.html
+$$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
+    
+    console.log(e);
+    console.log('Página habitaciones cargada!');
 
+    // Habitación Matrimonial
+    $$('#btnH1').on('click', function(){
+        console.log("Selección: Habitación Matrimonial!");
+        
+    });
+
+    
+    
+
+    
+
+
+})
 
 
 
