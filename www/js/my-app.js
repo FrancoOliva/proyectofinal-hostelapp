@@ -24,7 +24,8 @@ var app = new Framework7({
         { path: '/registrar-cliente/', url: 'registrar-cliente.html',},
         { path: '/dar-de-baja/', url: 'dar-de-baja.html', },
         { path: '/avisos-usuario/', url: 'avisos-usuario.html', },
-        { path: '/habitaciones/', url: 'habitaciones.html', }
+        { path: '/habitaciones/', url: 'habitaciones.html', },
+        { path: '/registrar-pago/', url: 'registrar-pago.html', }
         
     ]
     // ... other parameters
@@ -70,6 +71,8 @@ $$(document).on('page:init', function (e) {
     // Do something here when page loaded and initialized
     console.log(e);
 })
+
+
 
 
 
@@ -209,17 +212,28 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
     console.log(e);
     console.log('Página menu-usuario cargada!');
 
-    $$('#btnRegistrarUsuario').on('click', function(){
-        console.log('Selección: registrar usuario.');
-        
-        mainView.router.navigate('/registrar-cliente/');
-    });
+    // botones del menú usuario
 
     $$('#btnHabitaciones').on('click', function(){
         console.log('Selección: ver habitaciones.');
         
         mainView.router.navigate('/habitaciones/');
     });
+
+    $$('#btnRegistrarCliente').on('click', function(){
+        console.log('Selección: registrar cliente.');
+        
+        mainView.router.navigate('/registrar-cliente/');
+    });
+
+    
+    
+
+    $$('#rp_cliente').on('click', function(){
+        mainView.router.navigate('/registrar-pago/');
+    });
+
+    
 
 
 })
@@ -426,85 +440,47 @@ $$(document).on('page:init', '.page[data-name="avisos-usuario"]', function (e) {
 $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     
     console.log(e);
-    console.log('Página habitaciones cargada!');
+    console.log('Página habitaciones cargada!');    
+    
 
-    var id_cama = "";
+$$('#btnMP').on('click', function(){
+    mainView.router.navigate('/menu-usuario/');
+});
 
-    estado_cama = $$('#estado_cama').html();
-    id_cliente  = $$('#id_cliente').html();
-    ocupada_por = $$('#ocupada_por').html();
-    fIngreso    = $$('#fIngreso').html();
 
-    $$('.camas').on('click', function(id){
 
-        var id_cama = this.id; // capturamos el ID de la cama seleccionada
-        console.log(id_cama);
-
-        var data = { // datos que se van a guardar en la db
-        estado: estado_cama,
-        idCliente: id_cliente,
-        nombreCliente: ocupada_por,
-        fechaIngreso: fIngreso
-
-        };
-
-        // cargar en la db o sobreescribir datos
-        coleccion_camasOcupadas.doc(id_cama).set(data)
-        .then(function(docRef) { // .then((docRef) => {
-        console.log("Datos de la cama guardados en la colección camasOcupadas!");
-        })
-        .catch(function(error) { // .catch((error) => {
-        console.log("Error: " + error);
-        });
-
-        // instantanea del documento
-        coleccion_camasOcupadas.doc(id_cama)
-            .onSnapshot((doc) => {
-                console.log('Instantanea tomada!');
-                console.log("Current data: ", doc.data());
-            });
+})  
 
 
 
 
-    });
+$$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
+    // Do something here when page loaded and initialized
+    console.log(e);
 
-    $$('#popup_buscar').on('click', function(){
-        id_cliente = $$('#popup_idCliente').val(); // capturamos id cliente ingresado en el input
+    console.log("Página registrar-pago cargada!");
 
-        var docRef = coleccion_clientes.doc(id_cliente);
+    $$('#rp_aceptar').on('click', function(){
+        
+        texto1 = "Pago registrado";
+        texto2 = "El pago del cliente fue cargado correctamente!";
 
-        docRef.get().then((doc) => {
-            if (doc.exists) {
-                console.log('Documento encontrado!');
-                console.log("Document data:", doc.data());
+        btn1 = "Registrar pago";
+        btn2 = "Menú principal";
 
-                $$('#estadoCama').html('Estado: OCUPADA');
-                $$('#db_cliente').html('Cliente: ' + doc.data().nombre);
-                $$('#db_fIngreso').html('Fecha de Ingreso: ' + doc.data().fRegistro);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
+        if(perfil == "usuario"){
+            ruta1 = "/registrar-pago/";
+            ruta2 = "/menu-usuario/";
+        } else {
+            ruta1 = "/registrar-pago/";
+            ruta2 = "/menu-admin/";
+        }
 
+        mainView.router.navigate('/avisos-usuario/');
 
-
-
-
-
-        //
-
-    });
-
-
-
-
-
-})    
 
 
         
+    });
+})     
 
