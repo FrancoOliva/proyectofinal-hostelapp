@@ -37,6 +37,8 @@ db = firebase.firestore();
 
 // referencia a la colección usuarios en nuestra DB
 coleccion_usuarios = db.collection('usuarios');
+coleccion_camasOcupadas = db.collection('camasOcupadas');
+coleccion_clientes = db.collection('clientes');
 
 // perfil del usuario conectado
 var perfil = "";
@@ -50,6 +52,8 @@ var btn2 = "";
 
 var ruta1 = ""
 var ruta2 = ""
+
+var id_cama = "";
 
 
 
@@ -424,21 +428,83 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     console.log(e);
     console.log('Página habitaciones cargada!');
 
-    // Habitación Matrimonial
-    $$('#btnH1').on('click', function(){
-        console.log("Selección: Habitación Matrimonial!");
-        
+    var id_cama = "";
+
+    estado_cama = $$('#estado_cama').html();
+    id_cliente  = $$('#id_cliente').html();
+    ocupada_por = $$('#ocupada_por').html();
+    fIngreso    = $$('#fIngreso').html();
+
+    $$('.camas').on('click', function(id){
+
+        var id_cama = this.id; // capturamos el ID de la cama seleccionada
+        console.log(id_cama);
+
+        var data = { // datos que se van a guardar en la db
+        estado: estado_cama,
+        idCliente: id_cliente,
+        nombreCliente: ocupada_por,
+        fechaIngreso: fIngreso
+
+        };
+
+        // cargar en la db o sobreescribir datos
+        coleccion_camasOcupadas.doc(id_cama).set(data)
+        .then(function(docRef) { // .then((docRef) => {
+        console.log("Datos de la cama guardados en la colección camasOcupadas!");
+        })
+        .catch(function(error) { // .catch((error) => {
+        console.log("Error: " + error);
+        });
+
+        // instantanea del documento
+        coleccion_camasOcupadas.doc(id_cama)
+            .onSnapshot((doc) => {
+                console.log('Instantanea tomada!');
+                console.log("Current data: ", doc.data());
+            });
+
+
+
+
     });
 
-    
-    
+    $$('#popup_buscar').on('click', function(){
+        id_cliente = $$('#popup_idCliente').val(); // capturamos id cliente ingresado en el input
 
-    
+        var docRef = coleccion_clientes.doc(id_cliente);
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log('Documento encontrado!');
+                console.log("Document data:", doc.data());
+
+                $$('#estadoCama').html('Estado: OCUPADA');
+                $$('#db_cliente').html('Cliente: ' + doc.data().nombre);
+                $$('#db_fIngreso').html('Fecha de Ingreso: ' + doc.data().fRegistro);
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
 
 
-})
 
 
 
 
+        //
+
+    });
+
+
+
+
+
+})    
+
+
+        
 

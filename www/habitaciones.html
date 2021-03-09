@@ -33,18 +33,21 @@
               <li class="accordion-item"><a class="item-content item-link" href="#">
 
                   <div class="item-inner">
-                    <div class="item-title">Cama Matrimonial</div>
+                    <div class="item-title camas" id="hm_c1">Cama Matrimonial</div>
                   </div>
                 </a>
                 
                 <div class="accordion-item-content">
                   <div class="block">
-                    <p>Estado: Ocupada</p>
-                    <p>Por el cliente: Franco</p>
-                    <p>Fecha de ingreso: dd/mm/yyyy</p>
-                    <p>Fecha de partida: dd/mm/yyyy</p>
-                    <p>Pago realizado: 1500</p>
-                    <p>Forma: Efectivo</p>
+
+                    <p id="estado_cama">Estado: LIBRE</p>
+                    <p id="id_cliente">-</p>
+                    <p id="ocupada_por">-</p>
+                    <p id="fIngreso">-</p>
+                    
+                   <!-- <p id="fPartida">Fecha de partida: dd/mm/yyyy</p>
+                    <p id="pRealizado">Pago realizado: 1500</p>
+                    <p id="forma">Forma: Efectivo</p> -->
 
                     <button class="col button button-outline button-round popup-open" data-popup=".popup-about">Modificar</button>
 
@@ -59,7 +62,7 @@
         
 
         <!-- Botón menú principal -->
-        <button href="/menu-usuario/" class="col button button-outline" id="btnMP">Menú principal</button>
+        <button class="col button button-outline" id="btnMP">Menú principal</button>
         
 
         <div class="popup popup-about">
@@ -68,16 +71,23 @@
 
 
                 
-                <p>ID: 36623432</p>
-                <p>Cliente: Franco</p>   
-                <p>Fecha de ingreso: dd/mm/yyyy</p>
-                <p>Fecha de partida: dd/mm/yyyy</p>
-                <p>Pago realizado: 1500</p>
-                <p>Forma: Efectivo</p>
+                <!-- Input ingresar ID / Pasaporte -->
+                <div class="row">
+                    <input class="col-50" type="text" name="dni_pasaporte" placeholder="DNI / Pasaporte" id="popup_idCliente">
+                    <button class="col-50 button button-outline button-round " id="popup_buscar">Buscar</button>
+                </div>
+
+                <p id="estadoCama">Estado: LIBRE</p>
+                <p id="db_cliente">Cliente: -</p>   
+                <p id="db_fIngreso">Fecha de ingreso: dd/mm/yyyy</p>
+                
+                <!--<p>Fecha de partida: dd/mm/yyyy</p>                
+                <p>Pago realizado: $$$$</p>
+                <p>Forma: ----</p> -->
 
                 <div class="row">
-                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about">Aceptar</button>
-                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about">Reiniciar datos</button>
+                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_aceptar">Aceptar</button>
+                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_reiniciar">Reiniciar datos</button>
                 </div>
               
             </div>
