@@ -197,6 +197,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
     $$('#btnAdminRegistrarPago').on('click', function(){
         console.log("Selección: Registrar un pago!");
+        mainView.router.navigate('/registrar-pago/');
     });
 
     $$('#btnAdminRegistrarGasto').on('click', function(){
@@ -257,10 +258,9 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
           .then((user) => {
             console.log('Usuario creado correctamente!');
             
-                // JSON con los datos del usuario que se va a crear
+                // JSON con los datos del usuario
                 var data = {
-                    usuario: email, 
-                    contraseña: password,
+                    usuario: email,                    
                     perfil: perfil
                     };
 
@@ -440,12 +440,12 @@ $$(document).on('page:init', '.page[data-name="avisos-usuario"]', function (e) {
 $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     
     console.log(e);
-    console.log('Página habitaciones cargada!');    
+    console.log('Página habitaciones cargada!');
     
 
-$$('#btnMP').on('click', function(){
-    mainView.router.navigate('/menu-usuario/');
-});
+    $$('#btnMP').on('click', function(){
+        mainView.router.navigate('/menu-usuario/');
+    });
 
 
 
@@ -453,34 +453,102 @@ $$('#btnMP').on('click', function(){
 
 
 
-
+// Page init correspondiente a la página registrar-pago.html
 $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
     // Do something here when page loaded and initialized
     console.log(e);
-
     console.log("Página registrar-pago cargada!");
+    var id_cliente = "";
+
+    $$('#rp_btnBuscarID').on('click', function(){
+        
+        id_cliente = $$('#rp_idCliente').val();
+        // utilizamos la variable id_cliente
+        // para buscar información en la base de datos
+        var docRef = coleccion_clientes.doc(id_cliente);
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Documento encontrado!");
+                console.log("Document data:", doc.data());
+
+                nombreCliente = doc.data().nombre;
+                apellidoCliente = doc.data().apellido;
+                fechaIngreso = doc.data().fRegistro;
+
+                console.log(nombreCliente);
+                console.log(apellidoCliente);
+                console.log(fechaIngreso);
+
+                $$('#rp_nCliente').val(nombreCliente);
+                $$('#rp_aCliente').val(apellidoCliente);
+                $$('#rp_fIngreso').val(fechaIngreso);
+
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+
+            });
 
     $$('#rp_aceptar').on('click', function(){
+
+        // se pasan los valores de los inputs a variables
+        // para guardarlos en la base de datos
+        var nombre          = $$('#rp_nCliente').val(); 
+        var apellido        = $$('#rp_aCliente').val();
+        var fechaIngreso    = $$('#rp_fIngreso').val();
+        var fechaPartida    = $$('#rp_fPartida').val();
+        var importe         = $$('#rp_importe').val();
+        var formaDePago     = $$('#rp_fdPago').val();
+
+        // objeto JSON con los datos que vamos a guardar en la base de datos
+        var data = {
+            nombre: nombre,
+            apellido: apellido,
+            fechaIngreso: fechaIngreso,
+            fechaPartida: fechaPartida,
+            importe: importe,
+            formaDePago: formaDePago,
+        };
+
+        // Añadir un documento nuevo a la colección "registroDePagos"
+        db.collection("registro_pagos").doc(id_cliente).set(data)
+        .then(() => {
+            console.log("Document successfully written!");
+            console.log('Documento guardado con éxito!');
+
+
+        })
+        .catch((error) => {
+            console.error("Error writing document: ", error);
+            alert("Error: no se puede avanzar porque el pago no pudo registrarse.");
+        });
         
         texto1 = "Pago registrado";
-        texto2 = "El pago del cliente fue cargado correctamente!";
+            texto2 = "El pago del cliente fue cargado correctamente!";
 
-        btn1 = "Registrar pago";
-        btn2 = "Menú principal";
+            btn1 = "Registrar pago";
+            btn2 = "Menú principal";
 
-        if(perfil == "usuario"){
-            ruta1 = "/registrar-pago/";
-            ruta2 = "/menu-usuario/";
-        } else {
-            ruta1 = "/registrar-pago/";
-            ruta2 = "/menu-admin/";
-        }
+            if(perfil == "usuario"){
+                ruta1 = "/registrar-pago/";
+                ruta2 = "/menu-usuario/";
+            } else {
+                ruta1 = "/registrar-pago/";
+                ruta2 = "/menu-admin/";
+            }
 
-        mainView.router.navigate('/avisos-usuario/');
+            mainView.router.navigate('/avisos-usuario/');
 
 
+        
 
         
     });
+
 })     
 
