@@ -307,6 +307,10 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
           });
 
     });
+
+    $$('#btnAdminVolver').on('click', function(){
+        mainView.router.navigate('/menu-admin/');
+    });
     
 })
 
@@ -482,6 +486,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     $$('#btnLiberarCama').on('click', function(){
 
         // si no hay ocupantes, reiniciamos la información de la cama
+        // en la base de datos y en la página
         coleccion_habMatrimonial.doc("1_cm").update
         ({  estado: "Libre",
             nombre: "-",
@@ -587,7 +592,21 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
     });
 
-        
+    $$('#btnMP').on('click', function(){
+
+        //verificamos perfil para saber a que menú volver
+        if(perfil == "admin"){
+            mainView.router.navigate('/menu-admin/');
+        } else {
+            mainView.router.navigate('/menu-usuario/');
+        }
+
+    });
+
+    $$('#popup_cancelar').on('click', function(){
+        // reiniciamos los datos de popup
+        reiniciarDatos();
+    });
 
 
     
@@ -599,7 +618,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 })  
 
 function reiniciarDatos(){
-    // reinicia la información de la cama
+    // reiniciamos los datos de popup
     $$('#popup_idCliente').val("");
     $$('#estadoCama').html("Estado: LIBRE");
     $$('#db_cliente').html("Nombre: -");
