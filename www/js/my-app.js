@@ -38,8 +38,9 @@ db = firebase.firestore();
 
 // referencia a la colección usuarios en nuestra DB
 coleccion_usuarios = db.collection('usuarios');
-coleccion_camasOcupadas = db.collection('camasOcupadas');
 coleccion_clientes = db.collection('clientes');
+coleccion_habMatrimonial = db.collection('habitacionMatrimonial');
+coleccion_registro_pagos = db.collection('registro_pagos');
 
 // perfil del usuario conectado
 var perfil = "";
@@ -184,6 +185,11 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     $$('#btnDarBaja').on('click', function(){
         console.log("Selección: Dar de baja!");
         mainView.router.navigate('/dar-de-baja/');
+    });
+
+    $$('#btnAdminHabitaciones').on('click', function(){
+        console.log('Página habitaciones cargada!');
+        mainView.router.navigate('/habitaciones/');
     });
 
     $$('#btnAdminRegistrar').on('click', function(){
@@ -441,6 +447,108 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     
     console.log(e);
     console.log('Página habitaciones cargada!');
+
+    // variables para capturar información del ocupante nuevo
+    var estado = "";
+    var nombre = "";
+    var fIngreso = "";
+    var fPartida = "";
+
+    // RECUPERAMOS INFO DE LA CAMA QUE VAMOS A USAR DE LA BASE DE DATOS    
+    var camaMatrimonial = coleccion_habMatrimonial.doc("1_cm");    
+
+    camaMatrimonial.get().then((doc) => {
+        if (doc.exists) {
+            console.log("El documento existe!");
+            console.log("Document data:", doc.data());
+
+            $$('#estado_cama').html("Estado: " + doc.data().estado);
+            $$('#ocupada_por').html("Nombre: " + doc.data().nombre);
+            $$('#fIngreso').html("Fecha de ingreso: " + doc.data().fIngreso);
+            $$('#fPartida').html("Fecha de partida: " + doc.data().fPartida);
+
+
+
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
+    
+    
+    $$('#popup_buscar').on('click', function(){
+
+        // BUSCAMOS EL ID INGRESADO EN LA BASE DE DATOS
+        var buscar_id = $$('#popup_idCliente').val();        
+        var docRef = coleccion_registro_pagos.doc(buscar_id);
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log('El documento existe!');
+                console.log("Document data:", doc.data());
+
+                // AUTOCOMPLETAMOS CON LA INFORMACIÓN DEL CLIENTE ENCONTRADO
+                $$('#estadoCama').html("Estado: " + "Ocupada");
+                $$('#db_cliente').html("Nombre: " + doc.data().nombre);
+                $$('#db_fIngreso').html("Fecha de ingreso: " + doc.data().fechaIngreso);
+                $$('#db_fPartida').html("Fecha de partida: " + doc.data().fechaPartida);
+
+                // info del nuevo ocupante guardada en variables
+                estado = "Ocupada";
+                nombre = doc.data().nombre;
+                fIngreso = doc.data().fechaIngreso;
+                fPartida = doc.data().fechaPartida;
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+
+        
+                
+    });
+
+    $$('#popup_aceptar').on('click', function(){
+
+
+        // hacemos un update en la base de datos
+        coleccion_habMatrimonial.doc("1_cm").update
+        ({  estado: estado,
+            nombre: nombre,
+            fIngreso: fIngreso,
+            fPartida:fPartida })
+        .then(function() {
+
+        console.log("Info de la cama actualizada con el nuevo ocupante!");
+            $$('#estado_cama').html("Estado: " + estado);
+            $$('#ocupada_por').html("Nombre: " + nombre);
+            $$('#fIngreso').html("Fecha de ingreso: " + fIngreso);
+            $$('#fPartida').html("Fecha de partida: " + fPartida);
+
+
+        })
+        .catch(function(error) {
+
+        console.log("Error: " + error);
+
+        });
+
+        // reiniciamos los datos que se ingresaron buscando al cliente        
+        reiniciarDatos();
+
+        
+
+    });
+
+        
+
+
     
 
     $$('#btnMP').on('click', function(){
@@ -550,5 +658,15 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
         
     });
 
-})     
+}) 
+
+function reiniciarDatos(){
+    $$('#popup_idCliente').val("");
+    $$('#estadoCama').html("Estado: LIBRE");
+    $$('#db_cliente').html("Nombre: -");
+    $$('#db_fIngreso').html("Fecha de ingreso: -");
+    $$('#db_fPartida').html("Fecha de partida: -");
+
+    
+}    
 
