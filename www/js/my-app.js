@@ -453,6 +453,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     var nombre = "";
     var fIngreso = "";
     var fPartida = "";
+    var estaOcupada = false;
 
     // RECUPERAMOS INFO DE LA CAMA QUE VAMOS A USAR DE LA BASE DE DATOS    
     var camaMatrimonial = coleccion_habMatrimonial.doc("1_cm");    
@@ -478,6 +479,34 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     });
 
     
+    $$('#btnLiberarCama').on('click', function(){
+
+        // si no hay ocupantes, reiniciamos la información de la cama
+        coleccion_habMatrimonial.doc("1_cm").update
+        ({  estado: "Libre",
+            nombre: "-",
+            fIngreso: "-",
+            fPartida:"-" })
+        .then(function() {
+
+        console.log("Info de la cama actualizada con el nuevo ocupante!");
+            
+            $$('#estado_cama').html("Estado: Libre");
+            $$('#ocupada_por').html("Nombre: -" );
+            $$('#fIngreso').html("Fecha de ingreso: -");
+            $$('#fPartida').html("Fecha de partida: -");
+
+
+        })
+        .catch(function(error) {
+
+        console.log("Error: " + error);
+
+        });
+
+
+
+    });
     
     $$('#popup_buscar').on('click', function(){
 
@@ -501,6 +530,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                 nombre = doc.data().nombre;
                 fIngreso = doc.data().fechaIngreso;
                 fPartida = doc.data().fechaPartida;
+                estaOcupada = true;
 
             } else {
                 // doc.data() will be undefined in this case
@@ -516,6 +546,9 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
     $$('#popup_aceptar').on('click', function(){
 
+        // si la cama es ocupada por un cliente nuevo
+        // actualizamos la información de esa cama en la base de datos
+        if(estaOcupada == true){
 
         // hacemos un update en la base de datos
         coleccion_habMatrimonial.doc("1_cm").update
@@ -526,6 +559,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
         .then(function() {
 
         console.log("Info de la cama actualizada con el nuevo ocupante!");
+            
             $$('#estado_cama').html("Estado: " + estado);
             $$('#ocupada_por').html("Nombre: " + nombre);
             $$('#fIngreso').html("Fecha de ingreso: " + fIngreso);
@@ -539,9 +573,16 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
         });
 
-        // reiniciamos los datos que se ingresaron buscando al cliente        
-        reiniciarDatos();
+        } else {
+            
+            // no hacer nada
+        }
 
+        // volvemos a false la variable estaOcupada
+        estaOcupada = false;
+
+        // reiniciamos los datos que se ingresaron buscando al cliente        
+            reiniciarDatos();
         
 
     });
@@ -551,13 +592,22 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
     
 
-    $$('#btnMP').on('click', function(){
-        mainView.router.navigate('/menu-usuario/');
-    });
+    
 
 
 
 })  
+
+function reiniciarDatos(){
+    // reinicia la información de la cama
+    $$('#popup_idCliente').val("");
+    $$('#estadoCama').html("Estado: LIBRE");
+    $$('#db_cliente').html("Nombre: -");
+    $$('#db_fIngreso').html("Fecha de ingreso: -");
+    $$('#db_fPartida').html("Fecha de partida: -");
+
+    
+}  
 
 
 
@@ -660,13 +710,5 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
 
 }) 
 
-function reiniciarDatos(){
-    $$('#popup_idCliente').val("");
-    $$('#estadoCama').html("Estado: LIBRE");
-    $$('#db_cliente').html("Nombre: -");
-    $$('#db_fIngreso').html("Fecha de ingreso: -");
-    $$('#db_fPartida').html("Fecha de partida: -");
-
-    
-}    
+  
 

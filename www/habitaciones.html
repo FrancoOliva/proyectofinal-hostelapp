@@ -47,7 +47,10 @@
                     <p id="fPartida">Fecha de partida: </p>
                     
 
-                    <button class="col button button-outline button-round popup-open" data-popup=".popup-about">Modificar</button>
+                    <div class="row">
+                        <button class="col-50 button button-outline button-round popup-open" data-popup=".popup-about">Modificar</button>
+                        <button class="col-50 button button-outline button-round" id="btnLiberarCama">Liberar Cama</button>
+                    </div>
 
                   </div>
                 </div>
@@ -71,7 +74,7 @@
                 
                 <!-- Input ingresar ID / Pasaporte -->
                 <div class="row">
-                    <input class="col-50" type="text" name="dni_pasaporte" placeholder="DNI / Pasaporte" id="popup_idCliente">
+                    <input class="col-50" type="text" name="dni_pasaporte" placeholder="DNI / Pasaporte" id="popup_idCliente" required validate />
                     <button class="col-50 button button-outline button-round " id="popup_buscar">Buscar</button>
                 </div>
 
@@ -83,7 +86,7 @@
 
                 <div class="row">
                     <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_aceptar">Aceptar</button>
-                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_reiniciar">Reiniciar datos</button>
+                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_cancelar">Cancelar</button>
                 </div>
               
             </div>
