@@ -1,0 +1,90 @@
+<!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
+<div class="page" data-name="registrar-gasto">
+    
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner">
+                                
+            <div class="title">Hostel App</div>                       
+                                
+        </div>
+    </div>
+    
+    <div class="page-content">
+
+        <p>Crear usuario</p>
+
+        
+            <!-- Input ingresar nombre -->
+              <div class="list no-hairlines-md">
+                   <ul>
+                    <li class="item-content item-input item-input-outline">
+                      <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title item-floating-label">Nombre</div>
+                        <div class="item-input-wrap">
+                          <input type="text" placeholder="Responsable del gasto" id="rg_nombre" required validate/>
+                          <span class="input-clear-button"></span>
+                        </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Input ingresar motivo -->
+              <div class="list no-hairlines-md">
+                   <ul>
+                    <li class="item-content item-input item-input-outline">
+                      <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                      </div>
+                      <div class="item-inner">
+                        <div class="item-title item-floating-label">Motivo</div>
+                        <div class="item-input-wrap">
+                          <input type="text" placeholder="En qué se gastó" id="rg_motivo" required validate/>
+                          <span class="input-clear-button"></span>
+                        </div>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+            <!-- Input ingresar password -->
+            <div class="list no-hairlines-md">
+                <ul>
+                    <li class="item-content item-input item-input-outline">
+                    <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title item-floating-label">Importe</div>
+                        <div class="item-input-wrap">
+                        <input type="number" placeholder="Importe del gasto" id="rg_importe" required validate/>
+                        <span class="input-clear-button"></span>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+
+            
+            <!-- Input fecha del gasto -->
+            <div class="item-inner">
+                    <div class="item-title item-label">Fecha</div>
+                    <div class="item-input-wrap">
+                      <input type="date" placeholder="Cuándo se gastó" id="rg_fecha" required validate/>
+                    </div>
+            </div>
+
+        <button class="col button button-outline" id="rg_Aceptar">Aceptar</button></br>
+        <button class="col button button-outline" id="rg_Volver">Volver</button></br>
+
+
+    </div>
+
+</div>

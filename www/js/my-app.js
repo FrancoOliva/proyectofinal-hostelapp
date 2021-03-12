@@ -25,7 +25,8 @@ var app = new Framework7({
         { path: '/dar-de-baja/', url: 'dar-de-baja.html', },
         { path: '/avisos-usuario/', url: 'avisos-usuario.html', },
         { path: '/habitaciones/', url: 'habitaciones.html', },
-        { path: '/registrar-pago/', url: 'registrar-pago.html', }
+        { path: '/registrar-pago/', url: 'registrar-pago.html', },
+        { path: '/registrar-gasto/', url: 'registrar-gasto.html', }
         
     ]
     // ... other parameters
@@ -58,6 +59,8 @@ var ruta2 = ""
 var id_cama = "";
 
 
+// page-init para copiar y pegar en caso de nuevas páginas
+// $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) { })
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -208,6 +211,18 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
     $$('#btnAdminRegistrarGasto').on('click', function(){
         console.log("Selección: Registrar un gasto!");
+        mainView.router.navigate('/registrar-gasto/');
+    });
+
+    $$('#btnAdminCerrarSesion').on('click', function(){
+
+        firebase.auth().signOut().then(() => {
+          // Sign-out successful.
+            console.log('Cerrar sesión ok!');
+            mainView.router.navigate('/index/');
+        }).catch((error) => {
+          // An error happened.
+        });
     });
 
 
@@ -231,15 +246,27 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
         console.log('Selección: registrar cliente.');
         
         mainView.router.navigate('/registrar-cliente/');
-    });
-
-    
+    });    
     
 
     $$('#rp_cliente').on('click', function(){
         mainView.router.navigate('/registrar-pago/');
     });
 
+    $$('#registrarGastoUsuario').on('click', function(){
+        mainView.router.navigate('/registrar-gasto/');
+    });
+
+    $$('#btnCerrarSesion').on('click', function(){
+
+        firebase.auth().signOut().then(() => {
+          // Sign-out successful.
+            console.log('Cerrar sesión ok!');
+            mainView.router.navigate('/index/');
+        }).catch((error) => {
+          // An error happened.
+        });
+    });
     
 
 
@@ -351,6 +378,10 @@ $$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
 
             mainView.router.navigate('/avisos-usuario/');
 
+    });
+
+    $$('#btnAdminVolver').on('click', function(){
+        mainView.router.navigate('/menu-admin/');
     });    
     
 
@@ -415,6 +446,14 @@ $$(document).on('page:init', '.page[data-name="registrar-cliente"]', function (e
             mainView.router.navigate('/avisos-usuario/');
         }
 
+    });
+
+    $$('#btnVolver').on('click', function(){
+        if (perfil == "admin"){
+            mainView.router.navigate('/menu-admin/');
+        } else {
+            mainView.router.navigate('/menu-usuario/');
+        }
     });
 
 })
@@ -609,12 +648,6 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     });
 
 
-    
-
-    
-
-
-
 })  
 
 function reiniciarDatos(){
@@ -637,6 +670,7 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
     console.log("Página registrar-pago cargada!");
     var id_cliente = "";
 
+    // busca el ID en la base de datos clientes
     $$('#rp_btnBuscarID').on('click', function(){
         
         id_cliente = $$('#rp_idCliente').val();
@@ -671,6 +705,7 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
 
             });
 
+    // si los datos son correctos guardamos la información en la base de datos
     $$('#rp_aceptar').on('click', function(){
 
         // se pasan los valores de los inputs a variables
@@ -721,13 +756,25 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
 
             mainView.router.navigate('/avisos-usuario/');
 
+   
+    });
 
-        
 
+    // volvemos a un menú dependiendo el perfil
+    $$('#rp_volver').on('click', function(){
         
+        console.log('Volver al menú!');
+        if(perfil == "admin"){
+            mainView.router.navigate('/menu-admin/');
+        } else {
+            mainView.router.navigate('/menu-usuario/');
+        }
     });
 
 }) 
 
   
+$$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) {
 
+        console.log("Página registrar-pago cargada!");
+})
