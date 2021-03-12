@@ -740,7 +740,7 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
             alert("Error: no se puede avanzar porque el pago no pudo registrarse.");
         });
         
-        texto1 = "Pago registrado";
+            texto1 = "Pago registrado";
             texto2 = "El pago del cliente fue cargado correctamente!";
 
             btn1 = "Registrar pago";
@@ -777,4 +777,60 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
 $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) {
 
         console.log("Página registrar-pago cargada!");
+
+        // volver al menú
+        $$('#rg_Volver').on('click', function(){
+            if(perfil == "admin"){
+                mainView.router.navigate('/menu-admin/');
+            } else {
+                mainView.router.navigate('/menu-usuario/');
+            }
+        });
+
+        $$('#rg_Aceptar').on('click', function(){
+            
+            nombre      = $$('#rg_nombre').val();
+            motivo      = $$('#rg_motivo').val();
+            importe     = $$('#rg_importe').val();
+            fecha       = $$('#rg_fecha').val();
+            
+            // creamos un objeto JSON con la información del gasto realizado
+            var data = {
+                nombre: nombre,
+                motivo: motivo,
+                importe: importe,
+                fecha: fecha
+            };
+
+            // Añadimos el objeto JSON a la colección registro_gastos en la base de datos
+            db.collection("registro_gastos").add(data)
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+                console.log("Documento agregado a la base de datos");
+
+
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+
+            // mensajes correspondientes a la página /avisos-usuario/
+                texto1 = "Gasto registrado";
+                texto2 = "Los datos del gasto fueron guardados correctamente.";
+                btn1 = "Registrar gasto";
+                btn2 = "Menú Principal";
+                
+                if (perfil == "admin"){
+                    ruta1 = '/registrar-gasto/';
+                    ruta2 = '/menu-admin/';
+                } else {
+                    ruta1 = '/registrar-gasto/';
+                    ruta2 = '/menu-usuario/';
+                }
+                
+                mainView.router.navigate('/avisos-usuario/');
+            
+            
+            
+        });
 })
