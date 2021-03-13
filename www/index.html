@@ -28,7 +28,7 @@
     <meta name="color-scheme" content="light dark">
 
     <!-- Your app title -->
-    <title>My App</title>
+    <title>Hostel App</title>
     <!-- Path to Framework7 Library CSS -->
     <link rel="stylesheet" href="lib/framework7/framework7-bundle.min.css">
     <!-- Path to icons -->
@@ -44,14 +44,14 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="index" class="page">
+            <div data-name="index" class="page body-app">
     
                 <!-- Top Navbar -->
-                <div class="navbar">
+                <div class="navbar" id="navbar-app">
                     <div class="navbar-bg"></div>
                     <div class="navbar-inner">
                         
-                        <div class="title">Hostel App</div>                       
+                        <div class="title" >Hostel App</div>                       
                         
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         
                             
                         <!-- Input ingresar usuario -->
-                        <div class="list no-hairlines-md">
+                        <div class="list no-hairlines-md col">
                             <ul>
                               <li class="item-content item-input item-input-outline">
                                 <div class="item-media">
@@ -83,7 +83,7 @@
                       </div>
 
                       <!-- Input ingresar password -->
-                        <div class="list no-hairlines-md">
+                        <div class="list no-hairlines-md col">
                             <ul>
                               <li class="item-content item-input item-input-outline">
                                 <div class="item-media">
@@ -100,10 +100,11 @@
                           </ul>
                       </div>
 
-
+                        <p id="mensajeLogin"></p>
                         <!-- Botón ingresar -->
+                        
                         <button class="col button button-outline" id="btnIngresar">Ingresar</button>
-                        <p id="mensajeLogin"></p>                       
+                        
                           
 
 
