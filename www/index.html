@@ -44,7 +44,7 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="index" class="page body-app">
+            <div data-name="index" class="page ">
     
                 <!-- Top Navbar -->
                 <div class="navbar" id="navbar-app">
@@ -59,51 +59,52 @@
                 
         
                 <!-- Scrollable page content -->
-                <div class="page-content">
+                <div class="page-content centrarContenido">
                     <div class="block">
-                        
-                        
-                            
-                        <!-- Input ingresar usuario -->
-                        <div class="list no-hairlines-md col">
-                            <ul>
-                              <li class="item-content item-input item-input-outline">
-                                <div class="item-media">
-                                  <i class="icon demo-list-icon"></i>
-                                </div>
-                                <div class="item-inner">
-                                  <div class="item-title item-floating-label">Usuario</div>
-                                  <div class="item-input-wrap">
-                                    <input type="text" placeholder="Tu usuario" id="usuarioLogin" value="franco.oliva1991@gmail.com" required validate/>
-                                    <span class="input-clear-button"></span>
-                                  </div>
-                                </div>
-                              </li>
-                          </ul>
-                      </div>
 
-                      <!-- Input ingresar password -->
-                        <div class="list no-hairlines-md col">
-                            <ul>
-                              <li class="item-content item-input item-input-outline">
-                                <div class="item-media">
-                                  <i class="icon demo-list-icon"></i>
-                                </div>
-                                <div class="item-inner">
-                                  <div class="item-title item-floating-label">Contraseña</div>
-                                  <div class="item-input-wrap">
-                                    <input type="password" placeholder="Tu contraseña" id="passLogin" value="36a623s432as" required validate/>
-                                    <span class="input-clear-button"></span>
-                                  </div>
-                                </div>
-                              </li>
-                          </ul>
-                      </div>
 
+
+                    <div>
+                        <div class="list no-hairlines-md">
+                            <ul>
+                                <li class="item-content item-input">
+                                    <div class="item-media">
+                                      <i class="icon demo-list-icon"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                      <div class="item-title item-label">Usuario</div>
+                                      <div class="item-input-wrap">
+                                        <input type="text" placeholder="Tu usuario" id="usuarioLogin" value="franco.oliva1991@gmail.com" required validate/>
+                                        <span class="input-clear-button"></span>
+                                      </div>
+                                    </div>
+                                </li>
+                                <li class="item-content item-input">
+                                    <div class="item-media">
+                                      <i class="icon demo-list-icon"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                      <div class="item-title item-label">Contraseña</div>
+                                      <div class="item-input-wrap">
+                                        <input type="password" placeholder="Tu contraseña" id="passLogin" value="36a623s432as" required validate/>
+                                        <span class="input-clear-button"></span>
+                                      </div>
+                                    </div>
+                                </li>                                
+                            </ul>
+                      </div>                
+                        
                         <p id="mensajeLogin"></p>
-                        <!-- Botón ingresar -->
                         
+                        <!-- Botón ingresar -->               
+                                
                         <button class="col button button-outline" id="btnIngresar">Ingresar</button>
+
+                        
+                    </div>
+                       
+                    
+                        
                         
                           
 
@@ -145,3 +146,4 @@
 </body>
 
 </html>
+

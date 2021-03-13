@@ -11,169 +11,124 @@
         </div>
     </div>
     
-    <div class="page-content">
-
-        <p>Registrar cliente</p>
+    <div class="page-content centrarContenido">
 
         
-        <!-- Input nombre cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Nombre</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="Tu nombre" id="c_nombre" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
+        <div>
 
-      <!-- Input apellido cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Apellido</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="Tu apellido" id="c_apellido" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
+          
+<div class="list no-hairlines-md">
+  <ul>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Nombre</div> 
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Nombre cliente" id="c_nombre" required validate/>     <!-- nombre cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Apellido</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Apellido cliente" id="c_apellido" required validate/>    <!-- apellido cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">DNI/Pasaporte</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="DNI/Pasaporte" id="c_dnipasaporte" required validate/> <!-- dni-pasaporte cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+        <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+          <div class="item-title item-label">Fecha de nacimiento</div>
+          <div class="item-input-wrap">
+            <input type="date" id="c_fNacimiento" required validate/>   <!-- fecha de nacimiento cliente -->
+          </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">País</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="País .." id="c_pais" required validate/>     <!-- país cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Ocupación</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Opcional .." id="c_ocupación" />    <!-- estudiante/empleado opcional .. cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Email</div>
+            <div class="item-input-wrap">
+              <input type="email" placeholder="cliente@email.com" id="c_email" required validate/> <!-- correo cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+        <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+          <div class="item-title item-label">Fecha de registro</div> <!-- fecha de registro cliente -->
+          <div class="item-input-wrap">
+            <input type="date" id="c_fIngreso" required validate/>
+          </div>
+          </div>
+      </li>
+  </ul>
+</div>  
 
-      <!-- Input DNI / Pasaporte cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">DNI / Pasaporte</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="DNI / Pasaporte" id="c_dnipasaporte" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
 
-      <!-- Input fecha de nacimiento cliente -->
-      <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Fecha de nacimiento</div>
-                  <div class="item-input-wrap">
-                    <input type="date" placeholder="Tu fecha" id="c_fNacimiento" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
+      <div class="row">
+        <button class="col-50 button button-outline" id="btnAceptar">Aceptar</button>
+        <button class="col-50 button button-outline" id="btnVolver">Volver</button>
       </div>
       
-      
+        </div>
 
-      <!-- Input país cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">País</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="Tu país" id="c_pais" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
-
-      <!-- Input ocupación cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Ocupación</div>
-                  <div class="item-input-wrap">
-                    <input type="text" placeholder="Tu país" id="c_ocupación" />
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
-
-      <!-- Input email cliente -->
-        <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Email</div>
-                  <div class="item-input-wrap">
-                    <input type="email" placeholder="Tu email" id="c_email" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>
-
-      <!-- Input Fecha de registro cliente -->
-      <div class="list no-hairlines-md">
-            <ul>
-              <li class="item-content item-input item-input-outline">
-                <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-                </div>
-                <div class="item-inner">
-                  <div class="item-title item-floating-label">Fecha de ingreso</div>
-                  <div class="item-input-wrap">
-                    <input type="date" placeholder="Tu email" id="c_fIngreso" required validate/>
-                    <span class="input-clear-button"></span>
-                  </div>
-                </div>
-              </li>
-          </ul>
-      </div>   
-
-      
-
-            
-
-            
-
-      <button class="col button button-outline" id="btnAceptar">Aceptar</button></br>
-      <button class="col button button-outline" id="btnVolver">Volver</button></br>
+        
+ 
 
 
     </div>
-
-
-
 </div>
+
+

@@ -13,78 +13,71 @@
     
     <div class="page-content">
 
-        <p>Registrar gasto</p>
+        <div class="list no-hairlines-md">
+          <ul>
+            <li class="item-content item-input">
+                <div class="item-media">
+                  <i class="icon demo-list-icon"></i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Nombre</div> 
+                  <div class="item-input-wrap">
+                    <input type="text" placeholder="Responsable del gasto" id="rg_nombre" required validate/>     <!-- nombre cliente -->
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+            </li>
+            <li class="item-content item-input">
+                <div class="item-media">
+                  <i class="icon demo-list-icon"></i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Motivo</div> 
+                  <div class="item-input-wrap">
+                    <input type="text" placeholder="En qué se gastó" id="rg_motivo" required validate/>     <!-- nombre cliente -->
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+            </li>  
+            <li class="item-content item-input">
+                <div class="item-media">
+                  <i class="icon demo-list-icon"></i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Importe</div> 
+                  <div class="item-input-wrap">
+                    <input type="number" placeholder="Importe del gasto" id="rg_importe" required validate/>     <!-- nombre cliente -->
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+            </li>
+            <li class="item-content item-input">
+        <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+          <div class="item-title item-label">Fecha del gasto</div>
+          <div class="item-input-wrap">
+            <input type="date" id="rg_fecha" />   <!-- fecha de nacimiento cliente -->
+          </div>
+          </div>
+      </li>
+      <li>
+        <div class="row">
+          <button class="col button button-outline" id="rg_Aceptar">Aceptar</button>
+          <button class="col button button-outline" id="rg_Volver">Volver</button>
+        </div>
+      </li>                
+          </ul>
+        </div>
 
         
-            <!-- Input ingresar nombre -->
-              <div class="list no-hairlines-md">
-                   <ul>
-                    <li class="item-content item-input item-input-outline">
-                      <div class="item-media">
-                        <i class="icon demo-list-icon"></i>
-                      </div>
-                      <div class="item-inner">
-                        <div class="item-title item-floating-label">Nombre</div>
-                        <div class="item-input-wrap">
-                          <input type="text" placeholder="Responsable del gasto" id="rg_nombre" required validate/>
-                          <span class="input-clear-button"></span>
-                        </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Input ingresar motivo -->
-              <div class="list no-hairlines-md">
-                   <ul>
-                    <li class="item-content item-input item-input-outline">
-                      <div class="item-media">
-                        <i class="icon demo-list-icon"></i>
-                      </div>
-                      <div class="item-inner">
-                        <div class="item-title item-floating-label">Motivo</div>
-                        <div class="item-input-wrap">
-                          <input type="text" placeholder="En qué se gastó" id="rg_motivo" required validate/>
-                          <span class="input-clear-button"></span>
-                        </div>
-                      </div>
-                    </li>
-                </ul>
-            </div>
-
-
-
-            <!-- Input ingresar password -->
-            <div class="list no-hairlines-md">
-                <ul>
-                    <li class="item-content item-input item-input-outline">
-                    <div class="item-media">
-                        <i class="icon demo-list-icon"></i>
-                    </div>
-                    <div class="item-inner">
-                        <div class="item-title item-floating-label">Importe</div>
-                        <div class="item-input-wrap">
-                        <input type="number" placeholder="Importe del gasto" id="rg_importe" required validate/>
-                        <span class="input-clear-button"></span>
-                        </div>
-                    </div>
-                    </li>
-                </ul>
-            </div>
-
             
-            <!-- Input fecha del gasto -->
-            <div class="item-inner">
-              <div class="item-title item-label">Fecha del gasto</div>
-              <div class="item-input-wrap">
-                <input type="date" id="rg_fecha" />
-              </div>
-            </div>
 
-        <button class="col button button-outline" id="rg_Aceptar">Aceptar</button></br>
-        <button class="col button button-outline" id="rg_Volver">Volver</button></br>
+        
 
 
     </div>
-
 </div>
+
+

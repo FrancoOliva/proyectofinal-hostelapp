@@ -146,3 +146,23 @@ body {
   --f7-navbar-large-title-text-color: #fff;
 }
 
+
+/* CONFIGURACIÓN BOTONES */
+.botones {
+  
+  margin-bottom: 10px;
+}
+
+.centrarContenido {
+    display: flex;
+    justify-content: center;
+}
+
+.mTop {
+  margin-top: 10px;
+}
+
+/*
+
+
+*/

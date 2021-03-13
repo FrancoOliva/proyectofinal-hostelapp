@@ -11,88 +11,112 @@
         </div>
     </div>
     
-    <div class="page-content">
+    <div class="page-content centrarContenido">
 
-        <p>Registrar pago</p>
+        
+          <div class="block">
 
-        <!-- Input buscar ID -->
-        <div class="item-inner">
-              <div class="item-title item-label">ID Cliente</div>
-              <div class="item-input-wrap row">
-                <input class="col-50" type="text" placeholder="ID/Pasaporte" id="rp_idCliente" />
-                <span class="input-clear-button"></span>
-                <button class="col-50 " id="rp_btnBuscarID">Buscar</button>
-              </div>
-              
-        </div>
           
-    
+<div class="list no-hairlines-md">
+  <ul>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">ID Cliente</div> 
+            <div class="item-input-wrap row">
+              <input class="col-50" type="text" placeholder="DNI/Pasaporte" id="rp_idCliente" />     <!-- nombre cliente -->
+              <button class="col-50 button-outline button-round" id="rp_btnBuscarID">Buscar ID</button>
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Nombre</div> 
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Nombre cliente" id="rp_nCliente" required validate/>     <!-- nombre cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Apellido</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Apellido cliente" id="rp_aCliente" required validate/>    <!-- apellido cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+        <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+          <div class="item-title item-label">Fecha de ingreso</div>
+          <div class="item-input-wrap">
+            <input type="date" placeholder="Fecha de ingreso" id="rp_fIngreso" required validate/>   <!-- fecha de nacimiento cliente -->
+          </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+        <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+          <div class="item-title item-label">Fecha de partida</div>
+          <div class="item-input-wrap">
+            <input type="date" placeholder="Fecha de partida" id="rp_fPartida" required validate/>   <!-- fecha de nacimiento cliente -->
+          </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Importe</div>
+            <div class="item-input-wrap">
+              <input type="number" placeholder="Importe" id="rp_importe" required validate/> <!-- dni-pasaporte cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li class="item-content item-input">
+          <div class="item-media">
+            <i class="icon demo-list-icon"></i>
+          </div>
+          <div class="item-inner">
+            <div class="item-title item-label">Forma de pago</div>
+            <div class="item-input-wrap">
+              <input type="text" placeholder="Efectivo/Tarjeta" id="rp_fdPago" required validate/>     <!-- país cliente -->
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+      </li>
+      <li>
 
-        
-        <!-- Input nombre cliente -->
-        <div class="item-inner">
-              <div class="item-title item-label">Nombre</div>
-              <div class="item-input-wrap">
-                <input type="text" placeholder="Nombre cliente" id="rp_nCliente" required validate/>
-                <span class="input-clear-button"></span>
-              </div>
+        <div class="row">
+          <button class="col button button-outline" id="rp_aceptar">Aceptar</button>
+          <button class="col button button-outline" id="rp_volver">Volver</button>        
         </div>
 
-      <!-- Input apellido cliente -->
-      <div class="item-inner">
-          <div class="item-title item-label">Apellido</div>
-            <div class="item-input-wrap">
-              <input type="text" placeholder="Apellido cliente" id="rp_aCliente" required validate/>
-              <span class="input-clear-button"></span>
-            </div>
-      </div>
-
-      
-
-      <!-- Input fecha de ingreso cliente -->
-      <div class="item-inner">
-              <div class="item-title item-label">Fecha de Ingreso</div>
-              <div class="item-input-wrap">
-                <input type="date" placeholder="Fecha de ingreso" id="rp_fIngreso" required validate/>
-              </div>
-      </div>
-
-      <!-- Input fecha de partida cliente -->
-      <div class="item-inner">
-              <div class="item-title item-label">Fecha de Partida</div>
-              <div class="item-input-wrap">
-                <input type="date" placeholder="Fecha de partida" id="rp_fPartida" required validate/>
-              </div>
-      </div>
-      
-      
-      <!-- Input TOTAL  -->
-      <div class="item-inner">
-          <div class="item-title item-label">Importe</div>
-            <div class="item-input-wrap">
-              <input type="number" placeholder="Importe" id="rp_importe" required validate/>
-              <span class="input-clear-button"></span>
-            </div>
-      </div>
-        
-      
-      <!-- Input forma de pago  -->
-      <div class="item-inner">
-          <div class="item-title item-label">Forma de pago</div>
-            <div class="item-input-wrap">
-              <input type="text" placeholder="Efectivo/Tarjeta" id="rp_fdPago" required validate/>
-              <span class="input-clear-button"></span>
-            </div>
-      </div>            
-
+      </li>
+    </ul>
+  </div>
             
+          </div> <!-- acá termina el block -->
 
-        <button class="col button button-outline" id="rp_aceptar">Aceptar</button></br>
-        <button class="col button button-outline" id="rp_volver">Volver</button></br>
+           
 
 
     </div>
-
-
-
 </div>
