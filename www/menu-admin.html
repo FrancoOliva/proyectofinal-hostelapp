@@ -2,14 +2,7 @@
 <div class="page" data-name="menu-admin">
     
     <!-- Top Navbar -->
-    <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner">
-                                
-            <div class="title">Hostel App</div>                       
-                                
-        </div>
-    </div>
+    
     
     <div class="page-content centrarContenido">
 
@@ -25,13 +18,24 @@
         <button class="col button button-outline botones" id="btnAdminBuscarClientes">Buscar clientes</button>
         <button class="col button button-outline botones" id="btnAdminRegistrarPago">Registrar un pago</button>
         <button class="col button button-outline botones" id="btnAdminRegistrarGasto">Registrar un gasto</button>
+        <button class="col button button-outline botones popup-open" id="btnAdminReporteDiario" data-popup=".popup-reporte">Generar reporte</button>
         <button class="col button button-outline botones" id="btnAdminCerrarSesion">Cerrar sesión</button>
         </div>
             
 
         
 
+        <div class="popup popup-reporte">
+            <div class="block">
+              <p>Reporte Diario</p>
+              <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron.</p>
+              
+              <p id="clientesNuevos">Clientes nuevos: 5 </p>
+              <p>Total en efectivo: 5 </p>
+              <p>Total con tarjeta: 500 </p>
+              <p>Gastos generados: 600</p>
 
+                <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+        </div>
     </div>
-
 </div>

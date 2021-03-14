@@ -59,12 +59,15 @@ var ruta2 = ""
 var id_cama = "";
 
 
+
+
 // page-init para copiar y pegar en caso de nuevas páginas
 // $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) { })
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
-    console.log("Device is ready!");   
+    console.log("Device is ready!"); 
+
 
     
 
@@ -84,7 +87,9 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
     
     console.log(e);
-    console.log('Página index cargada!!');    
+    console.log('Página index cargada!!');  
+
+      
 
     /*
     var data = {
@@ -179,6 +184,31 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     console.log(e);
     console.log('Página menu-admin cargada!');
 
+    var clientesNuevos = 0;
+
+    // recuperamos los clientes de la base de datos
+        coleccion_clientes.get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                //console.log(doc.id, " => ", doc.data());
+                
+                // console.log(doc.data());
+                console.log("Los clientes se guardaron en una variable!");
+
+                clientesNuevos++;
+                
+
+            
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+    
+    
+
     // botones del mneú admin
     $$('#btnCrearUsuario').on('click', function(){
         console.log("Selección: Crear usuario!");
@@ -213,6 +243,17 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
         console.log("Selección: Registrar un gasto!");
         mainView.router.navigate('/registrar-gasto/');
     });
+
+    $$('#btnAdminReporteDiario').on('click', function(){
+        console.log("Selección: Reporte diario!");
+        console.log('GENERAR REPORTE DIARIO!')
+        
+
+        $$('#clientesNuevos').html("Clientes nuevos: " + clientesNuevos)
+        
+    });
+
+    
 
     $$('#btnAdminCerrarSesion').on('click', function(){
 
@@ -650,6 +691,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
 })  
 
+// este popup permite editar la información del ocupante de una cama
 function reiniciarDatos(){
     // reiniciamos los datos de popup
     $$('#popup_idCliente').val("");
