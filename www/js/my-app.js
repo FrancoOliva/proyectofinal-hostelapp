@@ -40,7 +40,7 @@ db = firebase.firestore();
 // referencia a la colección usuarios en nuestra DB
 coleccion_usuarios = db.collection('usuarios');
 coleccion_clientes = db.collection('clientes');
-coleccion_habMatrimonial = db.collection('habitacionMatrimonial');
+//coleccion_hp5 = db.collection('habitacionPara5personas');
 coleccion_registro_pagos = db.collection('registro_pagos');
 
 // perfil del usuario conectado
@@ -184,27 +184,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
     console.log(e);
     console.log('Página menu-admin cargada!');
 
-    var clientesNuevos = 0;
-
-    // recuperamos los clientes de la base de datos
-        coleccion_clientes.get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                //console.log(doc.id, " => ", doc.data());
-                
-                // console.log(doc.data());
-                console.log("Los clientes se guardaron en una variable!");
-
-                clientesNuevos++;
-                
-
-            
-            });
-        })
-        .catch((error) => {
-            console.log("Error getting documents: ", error);
-        });
+    // FALTA TERMINAR REPORTE DIARIO
 
     
     
@@ -539,29 +519,53 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     var fPartida = "";
     var estaOcupada = false;
 
-    // RECUPERAMOS INFO DE LA CAMA QUE VAMOS A USAR DE LA BASE DE DATOS    
-    var camaMatrimonial = coleccion_habMatrimonial.doc("1_cm");    
 
-    camaMatrimonial.get().then((doc) => {
-        if (doc.exists) {
-            console.log("El documento existe!");
-            console.log("Document data:", doc.data());
+    
 
-            $$('#estado_cama').html("Estado: " + doc.data().estado);
-            $$('#ocupada_por').html("Nombre: " + doc.data().nombre);
-            $$('#fIngreso').html("Fecha de ingreso: " + doc.data().fIngreso);
-            $$('#fPartida').html("Fecha de partida: " + doc.data().fPartida);
+    //RECORREMOS CAMAS DE UNA COLECCIÓN PARA OBTENER SUS DATOS
 
+        db.collection("habitacionPara5personas").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            
+            console.log(doc.id, " => ", doc.data());
+            
+            
+            $$('#listaCamas_hp5').append(
 
+        "<!-- CAMA "+doc.id+" -->" +
+        '<li class="accordion-item">' +
+        '<a class="item-content item-link" href="#">' +
+        '<div class="item-inner">' +
+        '<div class="item-title camas" id="'+doc.id+'"> Cama '+doc.id+'</div>' +
+        '</div>' +
+        '</a>' +
+                
+        '<div class="accordion-item-content">' +
+        '<div class="block">' +
 
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
+        '<p id="estado_cama">Estado: '+doc.data().estado+'</p>' +                 
+                    
+        '<p id="ocupada_por">Nombre: '+doc.data().nombreCliente+'</p>' +
+        '<p id="fIngreso">Fecha de ingreso: '+doc.data().ingresoCliente+'</p>' +                   
+        '<p id="fPartida">Fecha de partida: '+doc.data().partidaCliente+'</p>' +
+                    
+
+        '<div class="row">' +
+        '<button class="col-50 button button-outline button-round popup-open modificar" data-popup=".popup-about" id="'+"mod_"+doc.id+'">Modificar</button>' +
+        '<button class="col-50 button button-outline button-round" id="btnLiberarCama">Liberar Cama</button>' +
+        '</div>' +
+
+        '</div>' +
+        '</div>' +
+
+        '</li>'
+            );
+   
+        });
     });
 
+       
     
     $$('#btnLiberarCama').on('click', function(){
 
@@ -569,9 +573,9 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
         // en la base de datos y en la página
         coleccion_habMatrimonial.doc("1_cm").update
         ({  estado: "Libre",
-            nombre: "-",
-            fIngreso: "-",
-            fPartida:"-" })
+            nombreCliente: "-",
+            ingresoCliente: "-",
+            partidaCliente:"-" })
         .then(function() {
 
         console.log("Info de la cama actualizada con el nuevo ocupante!");
@@ -690,6 +694,10 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
 
 })  
+
+function capturarIDcama(id){
+    console.log(id);
+}
 
 // este popup permite editar la información del ocupante de una cama
 function reiniciarDatos(){
