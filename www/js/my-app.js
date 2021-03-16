@@ -276,7 +276,33 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                     $$('#pagosConTarjeta').text("Pagos con tarjeta: "+ pagosConTarjeta);
                 }
 
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
 
+        
+        // recuperamos los gastos que se hicieron en el día de la base de datos
+        // y los guardamos en una variable
+        var gastos = 0;
+
+
+        db.collection("registro_gastos").where("fecha", "==", reporteHoy)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+
+                gastos += parseInt(doc.data().importe);
+                console.log("Gastos del día: " + doc.data().importe);
+            });
+
+            if(gastos == 0){
+                $$('#gastos').text("Gastos: No hay gastos.");
+            } else {
+                $$('#gastos').text("Gastos: " + gastos);
+            }
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
