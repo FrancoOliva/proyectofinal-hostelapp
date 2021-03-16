@@ -9,8 +9,7 @@
         <div>
         <p>¿Qué quieres hacer primero?</p> <!--  </br>  -->
 
-        <!-- Botón - Menú  -->
-            
+        <!-- Botón - Menú  -->            
         <button class="col button button-outline botones" id="btnCrearUsuario">Crear usuario</button>
         <button class="col button button-outline botones" id="btnDarBaja">Dar de baja</button>
         <button class="col button button-outline botones" id="btnAdminHabitaciones">Ver habitaciones</button>
@@ -25,17 +24,38 @@
 
         
 
-        <div class="popup popup-reporte">
+        <div class="popup popup-reporte ">
             <div class="block">
+              
               <p>Reporte Diario</p>
               <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron.</p>
               
-              <p id="clientesNuevos">Clientes nuevos: 5 </p>
-              <p>Total en efectivo: 5 </p>
-              <p>Total con tarjeta: 500 </p>
-              <p>Gastos generados: 600</p>
+              <div>
+                <p id="clientesNuevos">Clientes nuevos:</p>
+              </div>
 
-                <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+              <div>
+                <p id="pagosEnEfectivo">Pagos en efectivo:</p>          
+              </div>
+
+              <div>
+                <p id="pagosConTarjeta">Pagos con Tarjeta:</p>
+              </div>
+
+              <div>
+                <p id="gastos">Gastos:</p>
+              </div>
+                
+              
+              
+                
+
+              <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+
+              
+
+              
+
         </div>
     </div>
 </div>
