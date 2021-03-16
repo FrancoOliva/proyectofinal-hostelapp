@@ -512,78 +512,165 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     console.log(e);
     console.log('Página habitaciones cargada!');
 
-    // variables para capturar información del ocupante nuevo
+    // CAPTURAMOS EL ID DE LA CAMA SELECCIONADA
+    var idCamaSeleccionada = "";
     var estado = "";
     var nombre = "";
     var fIngreso = "";
     var fPartida = "";
     var estaOcupada = false;
 
-
     
 
     //RECORREMOS CAMAS DE UNA COLECCIÓN PARA OBTENER SUS DATOS
-
-        db.collection("habitacionPara5personas").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            
-            console.log(doc.id, " => ", doc.data());
-            
-            
-            $$('#listaCamas_hp5').append(
-
-        "<!-- CAMA "+doc.id+" -->" +
-        '<li class="accordion-item">' +
-        '<a class="item-content item-link" href="#">' +
-        '<div class="item-inner">' +
-        '<div class="item-title camas" id="'+doc.id+'"> Cama '+doc.id+'</div>' +
-        '</div>' +
-        '</a>' +
+    db.collection("habitacionPara5personas").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
                 
-        '<div class="accordion-item-content">' +
-        '<div class="block">' +
+                console.log(doc.id, " => ", doc.data());    
+                
+                
+                estadoCama = doc.data().estado;
 
-        '<p id="estado_cama">Estado: '+doc.data().estado+'</p>' +                 
+                $$('#listaCamas_hp5').append(
+
+                "<!-- CAMA "+doc.id+" -->" +
+                '<li class="accordion-item">' +
+                '<a class="item-content item-link" href="#">' +
+                '<div class="item-inner">' +
+                '<div class="item-title camaSeleccionada" id="'+doc.id+'"'+'>Cama '+doc.id+'</div>' +
+                '</div>' +
+                '</a>' +
+                        
+                '<div class="accordion-item-content">' +
+                '<div class="block">' +
+
+                '<p id="estado'+doc.id+'">Estado: '+doc.data().estado+'</p>' +                 
+                            
+                '<p id="nombre'+doc.id+'">Nombre: '+doc.data().nombreCliente+'</p>' +
+                '<p id="ingreso'+doc.id+'">Fecha de ingreso: '+doc.data().ingresoCliente+'</p>' +                   
+                '<p id="partida'+doc.id+'">Fecha de partida: '+doc.data().partidaCliente+'</p>' +
+                            
+
+                '<div class="row">' +
+                '<button class="col-50 button button-outline button-round popup-open modificar" data-popup=".popup-about">Modificar</button>' +
+                '<button class="col-50 button button-outline button-round" id="btnLiberarCama">Liberar Cama</button>' +
+                '</div>' +
+
+                '</div>' +
+                '</div>' +
+
+                '</li>'
+                    );
+           
+            }); // cierra el .then
+
+            // CAPTURAMOS ID CAMA SELECCIONADA
+            $$('.camaSeleccionada').on('click', function(id){  // CONTINUAR
+                idCamaSeleccionada = this.id;
+                console.log(idCamaSeleccionada);
+            });
+
+            // BUSCAMOS ID del nuevo ocupante en la base de datos
+            $$('#popup_buscar').on('click', function(){
+
+                    // BUSCAMOS EL ID INGRESADO EN LA BASE DE DATOS
+                    var buscar_id = $$('#popup_idCliente').val();        
+                    var docRef = coleccion_registro_pagos.doc(buscar_id);
+
+                    docRef.get().then((doc) => {
+                        if (doc.exists) {
+                            console.log('El documento existe!');
+                            console.log("Document data:", doc.data());
+
+                            // AUTOCOMPLETAMOS CON LA INFORMACIÓN DEL CLIENTE ENCONTRADO
+                            $$('#estadoCama').html("Estado: " + "Ocupada");
+                            $$('#db_cliente').html("Nombre: " + doc.data().nombre);
+                            $$('#db_fIngreso').html("Fecha de ingreso: " + doc.data().fechaIngreso);
+                            $$('#db_fPartida').html("Fecha de partida: " + doc.data().fechaPartida);
+
+                            // info del nuevo ocupante guardada en variables
+                            estado = "Ocupada";
+                            nombre = doc.data().nombre;
+                            fIngreso = doc.data().fechaIngreso;
+                            fPartida = doc.data().fechaPartida;
+                            estaOcupada = true;
+
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("No such document!");
+                        }
+                    }).catch((error) => {
+                        console.log("Error getting document:", error);
+                    });
+
                     
-        '<p id="ocupada_por">Nombre: '+doc.data().nombreCliente+'</p>' +
-        '<p id="fIngreso">Fecha de ingreso: '+doc.data().ingresoCliente+'</p>' +                   
-        '<p id="fPartida">Fecha de partida: '+doc.data().partidaCliente+'</p>' +
-                    
+                            
+            });
 
-        '<div class="row">' +
-        '<button class="col-50 button button-outline button-round popup-open modificar" data-popup=".popup-about" id="'+"mod_"+doc.id+'">Modificar</button>' +
-        '<button class="col-50 button button-outline button-round" id="btnLiberarCama">Liberar Cama</button>' +
-        '</div>' +
+            // MODIFICAMOS INFORMACIÓN DE LA CAMA EN LA BASE DE DATOS CON EL NUEVO OCUPANTE
+            $$('#popup_aceptar').on('click', function(){
 
-        '</div>' +
-        '</div>' +
+            // si la cama es ocupada por un cliente nuevo
+            // actualizamos la información de esa cama en la base de datos
+            if(estaOcupada == true){
 
-        '</li>'
-            );
-   
+            // hacemos un update en la base de datos
+            db.collection('habitacionPara5personas').doc(idCamaSeleccionada).update
+            ({  estado: estado,
+                nombreCliente: nombre,
+                ingresoCliente: fIngreso,
+                partidaCliente:fPartida })
+            .then(function() {
+
+            console.log("Info de la cama actualizada con el nuevo ocupante!");
+            // actualizamos la vista de la cama seleccionada
+            // mostrando la información del nuevo ocupante que completamos en el popup
+            $$('#estado'+idCamaSeleccionada).html("Estado: "+ estado);
+            $$('#nombre'+idCamaSeleccionada).html("Nombre: "+ nombre);
+            $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: "+ fIngreso);
+            $$('#partida'+idCamaSeleccionada).html("Fecha de partida: "+ fPartida);
+
+
+            })
+            .catch(function(error) {
+
+            console.log("Error: " + error);
+
+            });
+
+            } else {
+                
+                // no hacer nada
+            }
+
+            // volvemos a false la variable estaOcupada
+            estaOcupada = false;
+
+            // reiniciamos los datos que se ingresaron buscando al cliente        
+            reiniciarDatos();
+            
+
         });
-    });
 
-       
-    
-    $$('#btnLiberarCama').on('click', function(){
+        // Actualizamos a datos por defecto porque no hay ocupantes
+        $$('#btnLiberarCama').on('click', function(){
 
         // si no hay ocupantes, reiniciamos la información de la cama
         // en la base de datos y en la página
-        coleccion_habMatrimonial.doc("1_cm").update
+        db.collection('habitacionPara5personas').doc(idCamaSeleccionada).update
         ({  estado: "Libre",
             nombreCliente: "-",
             ingresoCliente: "-",
             partidaCliente:"-" })
         .then(function() {
 
-        console.log("Info de la cama actualizada con el nuevo ocupante!");
+        console.log("Datos actualizados en la DB: cama libre, no hay ocupantes.");
             
-            $$('#estado_cama').html("Estado: Libre");
-            $$('#ocupada_por').html("Nombre: -" );
-            $$('#fIngreso').html("Fecha de ingreso: -");
-            $$('#fPartida').html("Fecha de partida: -");
+            $$('#estado'+idCamaSeleccionada).html("Estado: Libre");
+            $$('#nombre'+idCamaSeleccionada).html("Nombre: -" );
+            $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: -");
+            $$('#partida'+idCamaSeleccionada).html("Fecha de partida: -");
 
 
         })
@@ -596,86 +683,12 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
 
     });
+
+
+
+    }); // termina   
     
-    $$('#popup_buscar').on('click', function(){
-
-        // BUSCAMOS EL ID INGRESADO EN LA BASE DE DATOS
-        var buscar_id = $$('#popup_idCliente').val();        
-        var docRef = coleccion_registro_pagos.doc(buscar_id);
-
-        docRef.get().then((doc) => {
-            if (doc.exists) {
-                console.log('El documento existe!');
-                console.log("Document data:", doc.data());
-
-                // AUTOCOMPLETAMOS CON LA INFORMACIÓN DEL CLIENTE ENCONTRADO
-                $$('#estadoCama').html("Estado: " + "Ocupada");
-                $$('#db_cliente').html("Nombre: " + doc.data().nombre);
-                $$('#db_fIngreso').html("Fecha de ingreso: " + doc.data().fechaIngreso);
-                $$('#db_fPartida').html("Fecha de partida: " + doc.data().fechaPartida);
-
-                // info del nuevo ocupante guardada en variables
-                estado = "Ocupada";
-                nombre = doc.data().nombre;
-                fIngreso = doc.data().fechaIngreso;
-                fPartida = doc.data().fechaPartida;
-                estaOcupada = true;
-
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-
-        
-                
-    });
-
-    $$('#popup_aceptar').on('click', function(){
-
-        // si la cama es ocupada por un cliente nuevo
-        // actualizamos la información de esa cama en la base de datos
-        if(estaOcupada == true){
-
-        // hacemos un update en la base de datos
-        coleccion_habMatrimonial.doc("1_cm").update
-        ({  estado: estado,
-            nombre: nombre,
-            fIngreso: fIngreso,
-            fPartida:fPartida })
-        .then(function() {
-
-        console.log("Info de la cama actualizada con el nuevo ocupante!");
-            
-            $$('#estado_cama').html("Estado: " + estado);
-            $$('#ocupada_por').html("Nombre: " + nombre);
-            $$('#fIngreso').html("Fecha de ingreso: " + fIngreso);
-            $$('#fPartida').html("Fecha de partida: " + fPartida);
-
-
-        })
-        .catch(function(error) {
-
-        console.log("Error: " + error);
-
-        });
-
-        } else {
-            
-            // no hacer nada
-        }
-
-        // volvemos a false la variable estaOcupada
-        estaOcupada = false;
-
-        // reiniciamos los datos que se ingresaron buscando al cliente        
-            reiniciarDatos();
-        
-
-    });
-
+    // volvemos al menú principal del usuario
     $$('#btnMP').on('click', function(){
 
         //verificamos perfil para saber a que menú volver
@@ -687,10 +700,13 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
     });
 
+
     $$('#popup_cancelar').on('click', function(){
         // reiniciamos los datos de popup
         reiniciarDatos();
     });
+
+
 
 
 })  
