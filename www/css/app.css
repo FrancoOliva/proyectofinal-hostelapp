@@ -91,13 +91,16 @@ body {
   height: 100vh;
 }
 
-/* Modificamos color de la aplicación */
+.botones {
+  
+}
+
 /* Custom color theme */
 :root {
-  --f7-theme-color: #61b15a;
-  --f7-theme-color-rgb: 97, 177, 90;
-  --f7-theme-color-shade: #4f9a49;
-  --f7-theme-color-tint: #7cbe76;
+  --f7-theme-color: #00af91;
+  --f7-theme-color-rgb: 133, 96, 63;
+  --f7-theme-color-shade: #694c32;
+  --f7-theme-color-tint: #a1744c;
 }
 /* Invert navigation bars to fill style */
 :root,
@@ -131,9 +134,9 @@ body {
 .navbar-large.navbar-transparent {
   --f7-navbar-large-title-text-color: #000;
 
-  --r: 97;
-  --g: 177;
-  --b: 90;
+  --r: 133;
+  --g: 96;
+  --b: 63;
   --progress: var(--f7-navbar-large-collapse-progress);
   --f7-bars-link-color: rgb(
     calc(var(--r) + (255 - var(--r)) * var(--progress)),
@@ -147,22 +150,5 @@ body {
 }
 
 
-/* CONFIGURACIÓN BOTONES */
-.botones {
-  
-  margin-bottom: 10px;
-}
-
-.centrarContenido {
-    display: flex;
-    justify-content: center;
-}
-
-.mTop {
-  margin-top: 10px;
-}
-
-/*
 
 
-*/

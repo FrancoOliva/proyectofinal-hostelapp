@@ -26,8 +26,8 @@ var app = new Framework7({
         { path: '/avisos-usuario/', url: 'avisos-usuario.html', },
         { path: '/habitaciones/', url: 'habitaciones.html', },
         { path: '/registrar-pago/', url: 'registrar-pago.html', },
-        { path: '/registrar-gasto/', url: 'registrar-gasto.html', }
-        
+        { path: '/registrar-gasto/', url: 'registrar-gasto.html', }, 
+        { path: '/buscar-cliente/', url: 'buscar-cliente.html', }
     ]
     // ... other parameters
   });
@@ -62,7 +62,7 @@ var id_cama = "";
 
 
 // page-init para copiar y pegar en caso de nuevas páginas
-// $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) { })
+// $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) {   console.log(e);  })
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
@@ -335,6 +335,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
     $$('#btnAdminBuscarClientes').on('click', function(){
         console.log("Selección: Buscar clientes");
+        mainView.router.navigate('/buscar-cliente/');
     });
 
     $$('#btnAdminRegistrarPago').on('click', function(){
@@ -1023,4 +1024,12 @@ $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) 
             
             
         });
+})
+
+$$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) {
+   console.log(e);
+   console.log("Página buscar-cliente cargada!");
+
+   
+
 })
