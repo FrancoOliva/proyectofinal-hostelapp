@@ -392,7 +392,11 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
         console.log('Selección: registrar cliente.');
         
         mainView.router.navigate('/registrar-cliente/');
-    });    
+    });
+
+    $$('#bc_cliente').on('click', function(){
+        mainView.router.navigate('/buscar-cliente/');
+    }); 
     
 
     $$('#rp_cliente').on('click', function(){
@@ -408,6 +412,16 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
         firebase.auth().signOut().then(() => {
           // Sign-out successful.
             console.log('Cerrar sesión ok!');
+
+            perfil = "";
+            texto1 = "";
+            texto2 = "";
+            btn1 = "";
+            btn2 = "";
+            ruta1 = "";
+            ruta2 = "";
+            id_cama = "";
+
             mainView.router.navigate('/index/');
         }).catch((error) => {
           // An error happened.
@@ -791,6 +805,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
         // en la base de datos y en la página
         db.collection('habitacionPara5personas').doc(idCamaSeleccionada).update
         ({  estado: "Libre",
+            apellidoCliente: "-",
             nombreCliente: "-",
             ingresoCliente: "-",
             partidaCliente:"-" })
@@ -798,8 +813,9 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
         console.log("Datos actualizados en la DB: cama libre, no hay ocupantes.");
             
-            $$('#estado'+idCamaSeleccionada).html("Estado: Libre");
+            $$('#estado'+idCamaSeleccionada).html("Estado: Libre");            
             $$('#nombre'+idCamaSeleccionada).html("Nombre: -" );
+            $$('#apellido'+idCamaSeleccionada).html("Apellido: -" );
             $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: -");
             $$('#partida'+idCamaSeleccionada).html("Fecha de partida: -");
 
@@ -852,6 +868,7 @@ function reiniciarDatos(){
     $$('#popup_idCliente').val("");
     $$('#estadoCama').html("Estado: LIBRE");
     $$('#db_cliente').html("Nombre: -");
+    $$('#db_apellido').html("Apellido: -");
     $$('#db_fIngreso').html("Fecha de ingreso: -");
     $$('#db_fPartida').html("Fecha de partida: -");
 
