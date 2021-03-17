@@ -1,5 +1,24 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="buscar-cliente">
+
+  <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner">
+        <div class="title">Buscar</div>
+        <div class="subnavbar">
+          <form class="searchbar">
+            <div class="searchbar-inner">
+              <div class="searchbar-input-wrap">
+                <input type="search" placeholder="Search" />
+                <i class="searchbar-icon"></i>
+                <span class="input-clear-button"></span>
+              </div>
+              <span class="searchbar-disable-button if-not-aurora">Cancel</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     
 
     
@@ -7,10 +26,40 @@
 
 
     
-    <div class="block block-strong">
-        <p>Se te va a devolver una lista de clientes que coincidan con el NOMBRE que pusiste en el buscador.</p>
-        
-    </div>  
+    <div class="searchbar-backdrop"></div>
+      <div class="block searchbar-hide-on-search">
+        <p>Para buscar a un cliente hay que ingresar solamente su nombre.</p>
+      </div>
+      <div class="list searchbar-found list accordion-list">
+        <ul id="ingresarContenido">
+          
+          <!-- Ejemplo 1 
+          <li class="item-content">
+            <div class="item-inner">
+              <div class="item-title" id="acura">Acura</div>
+            </div>
+          </li> -->
+
+          <!-- Ejemplo 2 
+          <li class="accordion-item"><a class="item-content item-link" href="#">
+              <div class="item-inner">
+                <div class="item-title">Item 1</div>
+              </div>
+            </a>
+            <div class="accordion-item-content">
+              <div class="block">
+                <p>Item 1 content. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dignissim viverra
+                  velit sed euismod. Mauris sed quam vehicula, dapibus ante a, aliquet augue.</p>
+              </div>
+            </div>
+          </li> -->
+          
+        </ul>
+      </div>
+      <div class="block searchbar-not-found">
+        <div class="block-inner">No hay clientes con ese nombre.</div>
+      </div>
+    </div> 
     
     
                         

@@ -641,6 +641,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
     var idCamaSeleccionada = "";
     var estado = "";
     var nombre = "";
+    var apellido = "";
     var fIngreso = "";
     var fPartida = "";
     var estaOcupada = false;
@@ -673,6 +674,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                 '<p id="estado'+doc.id+'">Estado: '+doc.data().estado+'</p>' +                 
                             
                 '<p id="nombre'+doc.id+'">Nombre: '+doc.data().nombreCliente+'</p>' +
+                '<p id="apellido'+doc.id+'">Apellido: '+doc.data().apellidoCliente+'</p>' +
                 '<p id="ingreso'+doc.id+'">Fecha de ingreso: '+doc.data().ingresoCliente+'</p>' +                   
                 '<p id="partida'+doc.id+'">Fecha de partida: '+doc.data().partidaCliente+'</p>' +
                             
@@ -710,13 +712,15 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
                             // AUTOCOMPLETAMOS CON LA INFORMACIÓN DEL CLIENTE ENCONTRADO
                             $$('#estadoCama').html("Estado: " + "Ocupada");
-                            $$('#db_cliente').html("Nombre: " + doc.data().nombre);
+                            $$('#db_cliente').html("Nombre: " + doc.data().nombre); 
+                            $$('#db_apellido').html("Apellido: " + doc.data().apellido);
                             $$('#db_fIngreso').html("Fecha de ingreso: " + doc.data().fechaIngreso);
                             $$('#db_fPartida').html("Fecha de partida: " + doc.data().fechaPartida);
 
                             // info del nuevo ocupante guardada en variables
                             estado = "Ocupada";
                             nombre = doc.data().nombre;
+                            apellido = doc.data().apellido;
                             fIngreso = doc.data().fechaIngreso;
                             fPartida = doc.data().fechaPartida;
                             estaOcupada = true;
@@ -744,6 +748,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
             db.collection('habitacionPara5personas').doc(idCamaSeleccionada).update
             ({  estado: estado,
                 nombreCliente: nombre,
+                apellidoCliente: apellido,
                 ingresoCliente: fIngreso,
                 partidaCliente:fPartida })
             .then(function() {
@@ -753,6 +758,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
             // mostrando la información del nuevo ocupante que completamos en el popup
             $$('#estado'+idCamaSeleccionada).html("Estado: "+ estado);
             $$('#nombre'+idCamaSeleccionada).html("Nombre: "+ nombre);
+            $$('#apellido'+idCamaSeleccionada).html("Apellido: "+ apellido);
             $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: "+ fIngreso);
             $$('#partida'+idCamaSeleccionada).html("Fecha de partida: "+ fPartida);
 
@@ -1026,10 +1032,80 @@ $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) 
         });
 })
 
-$$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) {
+
+$$(document).on('page:init', '.page[data-name="buscar-cliente"]', function (e) {
    console.log(e);
    console.log("Página buscar-cliente cargada!");
 
-   
+
+   // OBTENEMOS TODOS LOS DOCUMENTOS DE LA COLECCIÓN habitacionPara5Personas
+   // para saber en qué cama esta el cliente que buscamos
+   db.collection("habitacionPara5personas").get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            
+            console.log(doc.id, " => ", doc.data());
+
+            if(doc.data().estado == "Libre" || doc.data().estado == "libre"){
+                $$('#ingresarContenido').append(
+
+                    '<li class="accordion-item"><a class="item-content item-link" href="#">' +
+                    '<div class="item-inner">' +
+                    '<div class="item-title">Cama ' + doc.id + ' Libre</div>' +
+                    '</div>' +
+                    '</a>' +
+                    '<div class="accordion-item-content">' +
+                    '<div class="block">' +
+                    '<p>Esta cama no se encuentra ocupada por ningún cliente y pertenece a la habitación para 5 personas.</p>' +
+                    
+                    '</div>' +
+                    '</div>' +
+                    '</li>' 
+                );
+            } else {
+                // agregamos html con los datos encontrados en la colección
+            $$('#ingresarContenido').append(
+
+                    '<li class="accordion-item"><a class="item-content item-link" href="#">' +
+                    '<div class="item-inner">' +
+                    '<div class="item-title">' + doc.data().nombreCliente +" "+doc.data().apellidoCliente+ '</div>' +
+                    '</div>' +
+                    '</a>' +
+                    '<div class="accordion-item-content">' +
+                    '<div class="block">' +
+                    '<p>El cliente se encuentra en la habitación para 5 personas, cama '+ doc.id +'.</p>' +
+                    '<p>Fecha de ingreso: '+doc.data().ingresoCliente + '</p>' +
+                    '<p>Fecha de partida: '+doc.data().partidaCliente +'</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</li>' 
+                );
+            }
+
+             
+        });
+
+        // código para que el searchbar funcione
+        // busca en la lista que creamos datos que coincidan con lo que buscamos
+        var searchbar = app.searchbar.create({
+            el: '.searchbar',
+            searchContainer: '.list',
+            searchIn: '.item-title',
+            on: {
+              search(sb, query, previousQuery) {
+                console.log(query, previousQuery);
+              }
+            }
+          });   
+
+    })
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });
+
+    
+
+    
 
 })
