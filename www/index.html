@@ -44,84 +44,67 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
 
-            <!-- Top Navbar -->
-            <div class="navbar" id="navbar-app">
-            <div class="navbar-bg"></div>
-            <div class="navbar-inner">
-
-               <!-- <div class="right">
-                <a class="link back">
-                <i class="icon icon-back"></i>
-                <span class="if-not-md">Back</span>
-                </a>
-                </div> -->
-                            
-                <div class="title">Hostel App</div>
-
-
-                            
-            </div>
-            </div>
-
-
             
             <!-- Initial Page, "data-name" contains page name -->
             <div data-name="index" class="page">
 
+                <div class="navbar">
+                    <div class="navbar-bg"></div>
+                    <div class="navbar-inner">                        
+                        <div class="title">Hostel App</div>                        
+                    </div>
+                </div>
+
+                <div class="toolbar toolbar-bottom">
+                    <div class="toolbar-inner">
+                    <a href="#" class="link">Link 1</a>
+                    <a href="#" class="link">Link 2</a>
+                    <a href="#" class="link">Link 3</a>
+                    </div>
+                </div>
+
 
                 <!-- Scrollable page content centrarContenido-->
-                <div class="page-content ">
-                    
-                    <div>
+                <div class="page-content">
+
+                    <div class="block contenedor">
                         <div class="list no-hairlines-md">
-                            <ul>
-                                <li class="item-content item-input">
-                                    <div class="item-media">
-                                      <i class="icon demo-list-icon"></i>
-                                    </div>
-                                    <div class="item-inner">
-                                      <div class="item-title item-label">Usuario</div>
-                                      <div class="item-input-wrap">
-                                        <input type="text" placeholder="Tu usuario" id="usuarioLogin" value="franco.oliva1991@gmail.com" required validate/>
-                                        <span class="input-clear-button"></span>
-                                      </div>
-                                    </div>
-                                </li>
-                                <li class="item-content item-input">
-                                    <div class="item-media">
-                                      <i class="icon demo-list-icon"></i>
-                                    </div>
-                                    <div class="item-inner">
-                                      <div class="item-title item-label">Contraseña</div>
-                                      <div class="item-input-wrap">
-                                        <input type="password" placeholder="Tu contraseña" id="passLogin" value="36a623s432as" required validate/>
-                                        <span class="input-clear-button"></span>
-                                      </div>
-                                    </div>
-                                </li>                                
-                            </ul>
-                      </div>                
+                                <ul>
+                                    <li class="item-content item-input">
+                                      <!--  <div class="item-media">
+                                          <i class="icon demo-list-icon"></i>
+                                        </div> -->
+                                        <div class="item-inner">
+                                          <div class="item-title item-label">Usuario</div>
+                                          <div class="item-input-wrap">
+                                            <input type="text" placeholder="Tu usuario" id="usuarioLogin" value="franco.oliva1991@gmail.com" required validate/>
+                                            <span class="input-clear-button"></span>
+                                          </div>
+                                        </div>
+                                    </li>
+                                    <li class="item-content item-input">
+                                       <!-- <div class="item-media">
+                                          <i class="icon demo-list-icon"></i>
+                                        </div> -->
+                                        <div class="item-inner">
+                                          <div class="item-title item-label">Contraseña</div>
+                                          <div class="item-input-wrap">
+                                            <input type="password" placeholder="Tu contraseña" id="passLogin" value="36a623s432as" required validate/>
+                                            <span class="input-clear-button"></span>
+                                          </div>
+                                        </div>
+                                    </li>                                
+                                </ul>
+                          </div>                
                         
                         <p id="mensajeLogin"></p>
                         
                         <!-- Botón ingresar -->      
                         <button class="col button button-outline" id="btnIngresar">Ingresar</button>
-                        
                     </div>
 
                 </div> <!-- page-content -->
             </div>
-
-            <div class="toolbar toolbar-bottom">
-                   <!--
-                     <div class="toolbar-inner">
-                      <a class="link">Link 1</a>
-                      <a class="link">Link 2</a>
-                      <a class="link">Link 3</a>
-                    </div>
-                    -->
-                  </div>
-
         </div>
     </div>
 

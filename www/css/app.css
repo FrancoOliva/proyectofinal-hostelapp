@@ -85,15 +85,17 @@
 }
 
 
-/* CAMBIOS AL BODY */
-body {
-  width: 100vw;
-  height: 100vh;
-}
 
 .botones {
   
 }
+
+.contenedor {
+  margin-top: 40%;
+  
+}
+
+
 
 /* Custom color theme */
 :root {
