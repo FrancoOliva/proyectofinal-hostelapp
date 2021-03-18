@@ -694,8 +694,8 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                             
 
                 '<div class="row">' +
-                '<button class="col-50 button button-outline button-round popup-open modificar" data-popup=".popup-about">Modificar</button>' +
-                '<button class="col-50 button button-outline button-round" id="btnLiberarCama">Liberar Cama</button>' +
+                '<button class="col-50 button button-outline popup-open modificar" data-popup=".popup-about">Modificar</button>' +
+                '<button class="col-50 button button-outline" id="btnLiberarCama">Liberar Cama</button>' +
                 '</div>' +
 
                 '</div>' +

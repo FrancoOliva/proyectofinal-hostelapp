@@ -87,12 +87,24 @@
 
 
 .botones {
-  
+  width: 200px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .contenedor {
   margin-top: 40%;
-  
+
+}
+
+.contenedor1 {
+  margin-top: 30%;
+
+}
+
+.centrarContenido {
+  display: flex;
+  justify-content: center;
 }
 
 

@@ -1,36 +1,50 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="habitaciones">
     
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+            <div class="navbar-inner">                        
+                <div class="title">Hostel App</div>                        
+                    </div>
+                </div>
 
-    <div class="page-content">
-
-
-        <h2>Habitación para 5 personas</h2>
-          <div class="list accordion-list">
-            <ul id="listaCamas_hp5">
-              
-              <!-- CAMAS GENERADAS CON JS Y SACANDO SUS DATOS DESDE FIREBASE -->
-
-            </ul>
+            <div class="toolbar toolbar-bottom">
+                <div class="toolbar-inner">
+                <a href="#" class="link">Link 1</a>
+                <a href="#" class="link">Link 2</a>
+                <a href="#" class="link">Link 3</a>
+                </div>
         </div>
 
+    <div class="page-content centrarContenido">
+
+
+        <div class="block">
+            <h2>Habitación para 5 personas</h2>
+                <div class="list accordion-list">
+                    <ul id="listaCamas_hp5">
+                  
+                    <!-- CAMAS GENERADAS CON JS Y SACANDO SUS DATOS DESDE FIREBASE -->
+
+                    </ul>
+                </div>
+
         
         
 
-        <!-- Botón menú principal -->
-        <button class="col button button-outline" id="btnMP">Volver</button>
+                <!-- Botón menú principal -->
+                <button class="col button button-outline" id="btnMP">Volver</button>
+        </div>
         
 
         <div class="popup popup-about">
             <div class="block">
-                <p>Cama Matrimonial</p>
-
-
+                <p>Información del ocupante</p>
                 
                 <!-- Input ingresar ID / Pasaporte -->
                 <div class="row">
                     <input class="col-50" type="text" name="dni_pasaporte" placeholder="DNI / Pasaporte" id="popup_idCliente" required validate />
-                    <button class="col-50 button button-outline button-round " id="popup_buscar">Buscar</button>
+                    <button class="col-50 button button-outline" id="popup_buscar">Buscar</button>
                 </div>
 
                 <p id="estadoCama">Estado: LIBRE</p>
@@ -41,8 +55,8 @@
                 
 
                 <div class="row">
-                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_aceptar">Aceptar</button>
-                    <button class="col-50 button button-outline button-round popup-close" data-popup=".popup-about" id="popup_cancelar">Cancelar</button>
+                    <button class="col-50 button button-outline popup-close" data-popup=".popup-about" id="popup_aceptar">Aceptar</button>
+                    <button class="col-50 button button-outline popup-close" data-popup=".popup-about" id="popup_cancelar">Cancelar</button>
                 </div>
               
             </div>

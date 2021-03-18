@@ -1,57 +1,63 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="dar-de-baja">
     
-    <!-- Top Navbar -->
-    
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+      <div class="navbar-inner">                        
+          <div class="title">Hostel App</div>                        
+      </div>
+  </div>
+
+  <div class="toolbar toolbar-bottom">
+      <div class="toolbar-inner">
+      <a href="#" class="link">Link 1</a>
+      <a href="#" class="link">Link 2</a>
+      <a href="#" class="link">Link 3</a>
+      </div>
+  </div>    
     
     <div class="page-content centrarContenido">
 
-      <div>
-        
+      <div class="block contenedor1">        
 
         <div class="list no-hairlines-md">
           <ul>
-              <li class="item-content item-input">
-            <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-               </div>
-                         <div class="item-inner">
-                           <div class="item-title item-label">Email</div>
-                          <div class="item-input-wrap">
-                            <input type="text" placeholder="usuario@email.com" id="ddbUsuario" required validate/>
-                             <span class="input-clear-button"></span>
-                           </div>
-                         </div>
-                    </li>
-                                  
-          <li class="item-content item-input">
-             <div class="item-media">
+            <li class="item-content item-input">
+            <!--  <div class="item-media">
+                <i class="icon demo-list-icon"></i>
+                  </div> -->
+                    <div class="item-inner">
+                      <div class="item-title item-label">Email</div>
+                        <div class="item-input-wrap">
+                          <input type="text" placeholder="usuario@email.com" id="ddbUsuario" required validate/>
+                              <span class="input-clear-button"></span>
+                                </div>
+                                 </div>
+                                  </li>                                  
+                                  <li class="item-content item-input">
+                                  <!--  <div class="item-media">
                                       <i class="icon demo-list-icon"></i>
-               </div>
-                         <div class="item-inner">
-                          <div class="item-title item-label">Perfil</div>
-                          <div class="item-input-wrap">
-                             <input type="text" placeholder="Escribir: baja" id="ddbPerfil" required validate/>
-                            <span class="input-clear-button"></span>
-                          </div>
-                        </div>
-                    </li>
-                    <li>
-                      <div class="row">
-                        <button class="col-50 button button-outline" id="btnAdminDarDeBaja">Dar de baja</button>
-                        <button class="col-50 button button-outline" id="btnAdminVolver">Volver</button>
-                      </div>
-                    </li>                              
-              </ul>
-        </div>   
+                                      </div> -->
+                                        <div class="item-inner">
+                                          <div class="item-title item-label">Perfil</div>
+                                            <div class="item-input-wrap">
+                                              <input type="text" placeholder="Escribir: baja" id="ddbPerfil" required validate/>
+                                            <span class="input-clear-button"></span>
+                                          </div>
+                                      </div>
+                                    </li>                                         
+                                  </ul>
+                                </div>
 
-
-        
+                            <div class="row">
+                              <button class="col-50 button button-outline" id="btnAdminDarDeBaja">Aceptar</button>
+                              <button class="col-50 button button-outline" id="btnAdminVolver">Volver</button>
+                            </div>                                          
       </div>
 
 
-    </div>
-
+    </div> <!-- page-content -->
 </div>
 
 
