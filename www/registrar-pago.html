@@ -1,34 +1,45 @@
 <!-- We don't need a full layout in this file because this page will be parsed with Ajax.  -->
 <div class="page" data-name="registrar-pago">
     
-    <!-- Top Navbar -->
-    
-    
-    <div class="page-content centrarContenido">
+  <!-- Top Navbar -->
+  <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner">                        
+          <div class="title">Hostel App</div>                        
+      </div>
+  </div>
 
-        
-          <div class="block">
+  <div class="toolbar toolbar-bottom">
+      <div class="toolbar-inner">
+      <a href="#" class="link">Link 1</a>
+      <a href="#" class="link">Link 2</a>
+      <a href="#" class="link">Link 3</a>
+      </div>
+  </div>
+    
+    
+<div class="page-content">
 
           
-<div class="list no-hairlines-md">
+<div class="list no-hairlines-md block">
   <ul>
       <li class="item-content item-input">
-          <div class="item-media">
+      <!--    <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
             <div class="item-title item-label">ID Cliente</div> 
-            <div class="item-input-wrap row">
-              <input class="col-50" type="text" placeholder="DNI/Pasaporte" id="rp_idCliente" />     <!-- nombre cliente -->
-              <button class="col-50 button-outline button-round" id="rp_btnBuscarID">Buscar ID</button>
+            <div class="item-input-wrap">
+              <input class="col" type="text" placeholder="DNI/Pasaporte" id="rp_idCliente" />     <!-- nombre cliente -->              
               <span class="input-clear-button"></span>
             </div>
+            <button class="col button button-outline" id="rp_btnBuscarID">Buscar ID</button>
           </div>
       </li>
       <li class="item-content item-input">
-          <div class="item-media">
+       <!--   <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
             <div class="item-title item-label">Nombre</div> 
             <div class="item-input-wrap">
@@ -39,8 +50,8 @@
       </li>
       <li class="item-content item-input">
           <div class="item-media">
-            <i class="icon demo-list-icon"></i>
-          </div>
+       <!--    <i class="icon demo-list-icon"></i>
+          </div> -->
           <div class="item-inner">
             <div class="item-title item-label">Apellido</div>
             <div class="item-input-wrap">
@@ -50,9 +61,9 @@
           </div>
       </li>
       <li class="item-content item-input">
-        <div class="item-media">
+     <!--   <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
           <div class="item-title item-label">Fecha de ingreso</div>
           <div class="item-input-wrap">
@@ -61,9 +72,9 @@
           </div>
       </li>
       <li class="item-content item-input">
-        <div class="item-media">
+     <!--   <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
           <div class="item-title item-label">Fecha de partida</div>
           <div class="item-input-wrap">
@@ -72,9 +83,9 @@
           </div>
       </li>
       <li class="item-content item-input">
-          <div class="item-media">
+      <!--    <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
             <div class="item-title item-label">Importe</div>
             <div class="item-input-wrap">
@@ -84,9 +95,9 @@
           </div>
       </li>
       <li class="item-content item-input">
-          <div class="item-media">
+      <!--    <div class="item-media">
             <i class="icon demo-list-icon"></i>
-          </div>
+          </div> -->
           <div class="item-inner">
             <div class="item-title item-label">Forma de pago</div>
             <div class="item-input-wrap">
@@ -95,20 +106,12 @@
             </div>
           </div>
       </li>
-      <li>
-
+    </ul>
         <div class="row">
           <button class="col button button-outline" id="rp_aceptar">Aceptar</button>
           <button class="col button button-outline" id="rp_volver">Volver</button>        
         </div>
-
-      </li>
-    </ul>
-  </div>
-            
-          </div> <!-- acá termina el block -->
-
-           
+  </div>           
 
 
     </div>
