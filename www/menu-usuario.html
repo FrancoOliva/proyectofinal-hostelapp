@@ -5,15 +5,15 @@
     <div class="navbar">
         <div class="navbar-bg"></div>
         <div class="navbar-inner">                        
-            <div class="title">Hostel App</div>                        
+            <div class="title">Usuario</div>                        
         </div>
     </div>
 
     <div class="toolbar toolbar-bottom">
         <div class="toolbar-inner">
-        <a href="#" class="link">Link 1</a>
+        <!-- <a href="#" class="link">Link 1</a>
         <a href="#" class="link">Link 2</a>
-        <a href="#" class="link">Link 3</a>
+        <a href="#" class="link">Link 3</a> -->
         </div>
     </div>
     
@@ -29,11 +29,39 @@
             <button class="col button button-outline botones" id="bc_cliente">Buscar clientes</button>            
             <button class="col button button-outline botones" id="rp_cliente">Registrar un pago</button>
             <button class="col button button-outline botones" id="registrarGastoUsuario">Registrar un gasto</button>
+            <button class="col button button-outline botones popup-open" id="btnReporteDiario" data-popup=".popup-usuarioReporte">Generar reporte</button>
             <button class="col button button-outline botones" id="btnCerrarSesion">Cerrar sesión</button>
+        </div>
+
+        <div class="popup popup-usuarioReporte">
+            <div class="block">
+                  
+                <p>Reporte Diario</p>
+                <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron en el día.</p>
+                  
+                <div>
+                <p id="clientesNuevos">Clientes nuevos:</p>
+                </div>
+
+                <div>
+                <p id="pagosEnEfectivo">Pagos en efectivo:</p>          
+                </div>
+
+                <div>
+                <p id="pagosConTarjeta">Pagos con Tarjeta:</p>
+                </div>
+
+                <div>
+                <p id="gastos">Gastos:</p>
+                </div>
+                    
+
+                <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+
+            </div>
         </div>
 
 
 
     </div>
-
 </div>

@@ -5,61 +5,64 @@
     <div class="navbar">
                     <div class="navbar-bg"></div>
                     <div class="navbar-inner">                        
-                        <div class="title">Hostel App</div>                        
+                        <div class="title">Administrador</div>                        
                     </div>
                 </div>
 
                 <div class="toolbar toolbar-bottom">
                     <div class="toolbar-inner">
-                    <a href="#" class="link">Link 1</a>
+                    <!-- <a href="#" class="link">Link 1</a>
                     <a href="#" class="link">Link 2</a>
-                    <a href="#" class="link">Link 3</a>
+                    <a href="#" class="link">Link 3</a> -->
                     </div>
                 </div>
     
     
     <div class="page-content centrarContenido">
 
-        <div class="block">
-        <p class="text-align-center">¿Qué quieres hacer primero?</p> <!--  </br>  -->
-
-        <!-- Botón - Menú  -->            
-        <button class="col button button-outline botones" id="btnCrearUsuario">Crear usuario</button>
-        <button class="col button button-outline botones" id="btnDarBaja">Dar de baja</button>
-        <button class="col button button-outline botones" id="btnAdminHabitaciones">Ver habitaciones</button>
-        <button class="col button button-outline botones" id="btnAdminRegistrar">Registrar clientes</button>
-        <button class="col button button-outline botones" id="btnAdminBuscarClientes">Buscar clientes</button>
-        <button class="col button button-outline botones" id="btnAdminRegistrarPago">Registrar un pago</button>
-        <button class="col button button-outline botones" id="btnAdminRegistrarGasto">Registrar un gasto</button>
-        <button class="col button button-outline botones popup-open" id="btnAdminReporteDiario" data-popup=".popup-reporte">Generar reporte</button>
-        <button class="col button button-outline botones" id="btnAdminCerrarSesion">Cerrar sesión</button>
-        </div>
-
-        <div class="popup popup-reporte">
             <div class="block">
-              
-              <p>Reporte Diario</p>
-              <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron en el día.</p>
-              
-              <div>
-                <p id="clientesNuevos">Clientes nuevos:</p>
-              </div>
+            <p class="text-align-center">¿Qué quieres hacer primero?</p> <!--  </br>  -->
 
-              <div>
-                <p id="pagosEnEfectivo">Pagos en efectivo:</p>          
-              </div>
+            <!-- Botón - Menú  -->            
+            <button class="col button button-outline botones" id="btnCrearUsuario">Crear usuario</button>
+            <button class="col button button-outline botones" id="btnDarBaja">Dar de baja</button>
+            <button class="col button button-outline botones" id="btnAdminHabitaciones">Ver habitaciones</button>
+            <button class="col button button-outline botones" id="btnAdminRegistrar">Registrar clientes</button>
+            <button class="col button button-outline botones" id="btnAdminBuscarClientes">Buscar clientes</button>
+            <button class="col button button-outline botones" id="btnAdminRegistrarPago">Registrar un pago</button>
+            <button class="col button button-outline botones" id="btnAdminRegistrarGasto">Registrar un gasto</button>
+            <button class="col button button-outline botones popup-open" id="btnAdminReporteDiario" data-popup=".popup-reporte">Generar reporte</button>
+            <button class="col button button-outline botones" id="btnAdminCerrarSesion">Cerrar sesión</button>
+            </div>
 
-              <div>
-                <p id="pagosConTarjeta">Pagos con Tarjeta:</p>
-              </div>
+            <div class="popup popup-reporte">
+                <div class="block">
+                  
+                  <p>Reporte Diario</p>
+                  <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron en el día.</p>
+                  
+                  <div>
+                    <p id="clientesNuevos">Clientes nuevos:</p>
+                  </div>
 
-              <div>
-                <p id="gastos">Gastos:</p>
-              </div>
-                
+                  <div>
+                    <p id="pagosEnEfectivo">Pagos en efectivo:</p>          
+                  </div>
 
-              <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+                  <div>
+                    <p id="pagosConTarjeta">Pagos con Tarjeta:</p>
+                  </div>
 
-        </div>
-    </div>
-</div>
+                  <div>
+                    <p id="gastos">Gastos:</p>
+                  </div>
+                    
+
+                  <p><a class="link popup-close" href="#" id="cerrar-popup">Cerrar</a></p>
+
+                </div>
+
+            </div>
+
+    </div> <!-- page-content -->
+</div> <!-- page -->

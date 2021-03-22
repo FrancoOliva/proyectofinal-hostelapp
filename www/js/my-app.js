@@ -223,7 +223,6 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                 $$('#clientesNuevos').text("Clientes nuevos: " + clientesNuevos);
             }
 
-
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
@@ -248,9 +247,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                     pagosEnEfectivo += parseInt(doc.data().importe);
                 } else {
                     pagosConTarjeta += parseInt(doc.data().importe);
-                }
-
-                
+                }                
 
             });
 
@@ -259,8 +256,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                 if(pagosEnEfectivo == 0){
                 console.log("No se registraron pagos en efectivo");
                 $$('#pagosEnEfectivo').text("Pagos en efectivo: No hay pagos.");
-                } else {
-                    
+                } else {                    
                     
                     console.log("Efectivo en el día: " + pagosEnEfectivo);
                     $$('#pagosEnEfectivo').text("Pagos en efectivo: "+ pagosEnEfectivo);
@@ -269,23 +265,19 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                 if(pagosConTarjeta == 0){
                 console.log("No se registraron pagos con tarjetas");
                 $$('#pagosConTarjeta').text("Pagos con tarjeta: No hay pagos.");
-                } else {
-                    
+                } else {                    
                     
                     console.log("Pagos con tarjeta: " + pagosConTarjeta);
                     $$('#pagosConTarjeta').text("Pagos con tarjeta: "+ pagosConTarjeta);
                 }
-
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
         });
-
         
         // recuperamos los gastos que se hicieron en el día de la base de datos
         // y los guardamos en una variable
         var gastos = 0;
-
 
         db.collection("registro_gastos").where("fecha", "==", reporteHoy)
         .get()
@@ -306,13 +298,9 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
         })
         .catch((error) => {
             console.log("Error getting documents: ", error);
-        });
-        
-    
-    
+        });   
 
-   
-    // botones del mneú admin
+    // botones del menú admin
     $$('#btnCrearUsuario').on('click', function(){
         console.log("Selección: Crear usuario!");
         mainView.router.navigate('/crear-usuario/');
@@ -380,8 +368,123 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
     console.log(e);
     console.log('Página menu-usuario cargada!');
 
-    // botones del menú usuario
+    // guardamos el día actual en una variable
+        var hoy = new Date();
+        var dia = hoy.getDate();
+        var mes = hoy.getMonth() + 1;
+        var año = hoy.getFullYear();
 
+        if(dia < 10){
+            dia = '0' + dia;
+        }
+
+        if(mes < 10){
+            mes = '0' + mes;
+        }
+
+        var reporteHoy = año + "-" + mes + "-" + dia;        
+        console.log(reporteHoy);
+        
+        // acumulamos los clientes nuevos en una variable
+        var clientesNuevos = 0;
+        
+        
+        // recuperamos de la db a los clientes registrados en el día
+        db.collection("clientes").where("fRegistro", "==", reporteHoy)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                clientesNuevos++;
+            });
+
+            if(clientesNuevos == 0){
+                console.log("No hay clientes nuevos");
+                $$('#clientesNuevos').text("Clientes nuevos: 0");
+            } else {
+                console.log("Clientes nuevos: " + clientesNuevos);
+                $$('#clientesNuevos').text("Clientes nuevos: " + clientesNuevos);
+            }
+
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+        // acumulamos en una variable los pagos en efectivo
+        var pagosEnEfectivo = 0;
+        var pagosConTarjeta = 0;
+
+        // recuperamos los pagos que se hicieron en el día
+        db.collection("registro_pagos").where("fechaIngreso", "==", reporteHoy)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                console.log(doc.data().importe, " ", doc.data().formaDePago, " ", doc.data().nombre);
+                
+                // filtramos los pagos en efectivo o en tarjeta para que se sumen
+                // en sus variables de forma correcta
+                if(doc.data().formaDePago == "efectivo"){
+                    pagosEnEfectivo += parseInt(doc.data().importe);
+                } else {
+                    pagosConTarjeta += parseInt(doc.data().importe);
+                }                
+
+            });
+
+                // si las variables que contienen los pagos en efectivo o tarjeta siguen en 0
+                // modificamos a un valor por defecto, caso contrario, mostramos la información correspondiente
+                if(pagosEnEfectivo == 0){
+                console.log("No se registraron pagos en efectivo");
+                $$('#pagosEnEfectivo').text("Pagos en efectivo: No hay pagos.");
+                } else {                    
+                    
+                    console.log("Efectivo en el día: " + pagosEnEfectivo);
+                    $$('#pagosEnEfectivo').text("Pagos en efectivo: "+ pagosEnEfectivo);
+                }
+
+                if(pagosConTarjeta == 0){
+                console.log("No se registraron pagos con tarjetas");
+                $$('#pagosConTarjeta').text("Pagos con tarjeta: No hay pagos.");
+                } else {                    
+                    
+                    console.log("Pagos con tarjeta: " + pagosConTarjeta);
+                    $$('#pagosConTarjeta').text("Pagos con tarjeta: "+ pagosConTarjeta);
+                }
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+        
+        // recuperamos los gastos que se hicieron en el día de la base de datos
+        // y los guardamos en una variable
+        var gastos = 0;
+
+        db.collection("registro_gastos").where("fecha", "==", reporteHoy)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+
+                gastos += parseInt(doc.data().importe);
+                console.log("Gastos del día: " + doc.data().importe);
+            });
+
+            if(gastos == 0){
+                $$('#gastos').text("Gastos: No hay gastos.");
+            } else {
+                $$('#gastos').text("Gastos: " + gastos);
+            }
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
+    // botones del menú usuario
     $$('#btnHabitaciones').on('click', function(){
         console.log('Selección: ver habitaciones.');
         
@@ -406,6 +509,8 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
     $$('#registrarGastoUsuario').on('click', function(){
         mainView.router.navigate('/registrar-gasto/');
     });
+
+
 
     $$('#btnCerrarSesion').on('click', function(){
 
