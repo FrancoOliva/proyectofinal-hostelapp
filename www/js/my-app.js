@@ -6,7 +6,7 @@ var app = new Framework7({
     // App root element
     root: '#app',
     // App Name
-    name: 'My App',
+    name: 'Hostel App',
     // App id
     id: 'com.myapp.test',
     // Enable swipe panel
@@ -243,7 +243,7 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
                 
                 // filtramos los pagos en efectivo o en tarjeta para que se sumen
                 // en sus variables de forma correcta
-                if(doc.data().formaDePago == "efectivo"){
+                if(doc.data().formaDePago == "efectivo" || doc.data().formaDePago == "Efectivo"){
                     pagosEnEfectivo += parseInt(doc.data().importe);
                 } else {
                     pagosConTarjeta += parseInt(doc.data().importe);
@@ -340,7 +340,9 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
 
     $$('#btnAdminCerrarSesion').on('click', function(){
 
-        firebase.auth().signOut().then(() => {
+        app.dialog.confirm('Seguro que quieres cerrar sesión?', function () {
+
+            firebase.auth().signOut().then(() => {
           // Sign-out successful.
             console.log('Cerrar sesión ok!');
 
@@ -357,6 +359,10 @@ $$(document).on('page:init', '.page[data-name="menu-admin"]', function (e) {
         }).catch((error) => {
           // An error happened.
         });
+          
+        });
+
+        
     });
 
 
@@ -514,23 +520,29 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
 
     $$('#btnCerrarSesion').on('click', function(){
 
-        firebase.auth().signOut().then(() => {
-          // Sign-out successful.
-            console.log('Cerrar sesión ok!');
+        app.dialog.confirm('Seguro que quieres cerrar sesión?', function () {
 
-            perfil = "";
-            texto1 = "";
-            texto2 = "";
-            btn1 = "";
-            btn2 = "";
-            ruta1 = "";
-            ruta2 = "";
-            id_cama = "";
+                firebase.auth().signOut().then(() => {
+              // Sign-out successful.
+                console.log('Cerrar sesión ok!');
 
-            mainView.router.navigate('/index/');
-        }).catch((error) => {
-          // An error happened.
+                perfil = "";
+                texto1 = "";
+                texto2 = "";
+                btn1 = "";
+                btn2 = "";
+                ruta1 = "";
+                ruta2 = "";
+                id_cama = "";
+
+                mainView.router.navigate('/index/');
+            }).catch((error) => {
+              // An error happened.
+            });
+          
         });
+
+        
     });
     
 

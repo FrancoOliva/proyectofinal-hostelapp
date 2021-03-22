@@ -108,6 +108,13 @@
   justify-content: center;
 }
 
+.centrarTexto {
+  text-align: center;
+}
+
+.margin4px {
+  margin-top: 5px;
+}
 
 
 /* Custom color theme */
