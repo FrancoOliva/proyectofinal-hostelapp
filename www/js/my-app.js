@@ -175,6 +175,23 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
     });
 
+    $$('#resetearClave').on('click', function(){
+        console.log('Aceptar y recuperar clave');
+
+        // resetear contraseña
+        var auth = firebase.auth();
+        var emailAddress = $$('#correoUsuario').val();;
+
+        auth.sendPasswordResetEmail(emailAddress).then(function() {
+          // Email sent.
+          console.log('Email enviado!');
+        }).catch(function(error) {
+          // An error happened.
+          console.log('Error!');
+        });
+
+    });
+
 })
 
 
