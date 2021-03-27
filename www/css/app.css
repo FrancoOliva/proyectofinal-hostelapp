@@ -94,7 +94,7 @@
 }
 
 .contenedor {
-  margin-top: 20%;
+  margin-top: 0px;
   
 
 }
@@ -118,20 +118,21 @@
 }
 
 #imgViajero {
-	width: 200px;
-	height: 200px;
+	width: 90vw;
+    margin-top: 25px;	
 
 }
 
 .contenedorIMG {
 	display: flex;
     justify-content: center;
+
 }
 
 
 /* Custom color theme */
 :root {
-  --f7-theme-color: #00af91;
+  --f7-theme-color: #32afb5;
   --f7-theme-color-rgb: 133, 96, 63;
   --f7-theme-color-shade: #694c32;
   --f7-theme-color-tint: #a1744c;
