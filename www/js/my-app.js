@@ -188,6 +188,7 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
         }).catch(function(error) {
           // An error happened.
           console.log('Error!');
+          
         });
 
     });
