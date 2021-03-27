@@ -450,7 +450,7 @@ $$(document).on('page:init', '.page[data-name="menu-usuario"]', function (e) {
                 
                 // filtramos los pagos en efectivo o en tarjeta para que se sumen
                 // en sus variables de forma correcta
-                if(doc.data().formaDePago == "efectivo"){
+                if(doc.data().formaDePago == "efectivo" || doc.data().formaDePago == "Efectivo"){
                     pagosEnEfectivo += parseInt(doc.data().importe);
                 } else {
                     pagosConTarjeta += parseInt(doc.data().importe);
@@ -806,7 +806,42 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                 
                 estadoCama = doc.data().estado;
 
-                $$('#listaCamas_hp5').append(
+                if (estadoCama == "Ocupada"){
+
+                    $$('#listaCamas_hp5').append(
+
+                "<!-- CAMA "+doc.id+" -->" +
+                '<li class="accordion-item">' +
+                '<a class="item-content item-link" href="#">' +
+                '<div class="item-inner">' +
+                '<div class="item-title camaSeleccionada text-color-red" id="'+doc.id+'"'+'>Cama '+doc.id+'</div>' +
+                '</div>' +
+                '</a>' +
+                        
+                '<div class="accordion-item-content">' +
+                '<div class="block">' +
+
+                '<p id="estado'+doc.id+'">Estado: '+doc.data().estado+'</p>' +                 
+                            
+                '<p id="nombre'+doc.id+'">Nombre: '+doc.data().nombreCliente+'</p>' +
+                '<p id="apellido'+doc.id+'">Apellido: '+doc.data().apellidoCliente+'</p>' +
+                '<p id="ingreso'+doc.id+'">Fecha de ingreso: '+doc.data().ingresoCliente+'</p>' +                   
+                '<p id="partida'+doc.id+'">Fecha de partida: '+doc.data().partidaCliente+'</p>' +
+                            
+
+                '<div class="row">' +
+                '<button class="col-50 button button-outline popup-open modificar" data-popup=".popup-about">Modificar</button>' +
+                '<button class="col-50 button button-outline" id="btnLiberarCama">Liberar Cama</button>' +
+                '</div>' +
+
+                '</div>' +
+                '</div>' +
+
+                '</li>'
+                    );
+
+                } else {
+                    $$('#listaCamas_hp5').append(
 
                 "<!-- CAMA "+doc.id+" -->" +
                 '<li class="accordion-item">' +
@@ -837,6 +872,8 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
                 '</li>'
                     );
+                }
+
            
             }); // cierra el .then
 
@@ -910,6 +947,8 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
             $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: "+ fIngreso);
             $$('#partida'+idCamaSeleccionada).html("Fecha de partida: "+ fPartida);
 
+            $$("#"+idCamaSeleccionada).addClass("text-color-red");
+
 
             })
             .catch(function(error) {
@@ -935,6 +974,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
         // Actualizamos a datos por defecto porque no hay ocupantes
         $$('#btnLiberarCama').on('click', function(){
 
+
         // si no hay ocupantes, reiniciamos la información de la cama
         // en la base de datos y en la página
         db.collection('habitacionPara5personas').doc(idCamaSeleccionada).update
@@ -953,13 +993,16 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
             $$('#ingreso'+idCamaSeleccionada).html("Fecha de ingreso: -");
             $$('#partida'+idCamaSeleccionada).html("Fecha de partida: -");
 
-
+            $$("#"+idCamaSeleccionada).removeClass("text-color-red");
         })
         .catch(function(error) {
 
         console.log("Error: " + error);
 
         });
+
+        
+        
 
 
 
