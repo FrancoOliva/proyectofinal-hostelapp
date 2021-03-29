@@ -93,10 +93,26 @@
   text-align: center;
 }
 
-.contenedor {
-  margin-top: 0px;
-  
+.separador1 {
+  margin-bottom: 15px;
 
+}
+
+.separador2 {
+  margin-bottom: 30px;
+
+}
+
+.mTop {
+  margin-top: 5em;
+}
+
+.mTop1 {
+  margin-top: 50px;
+}
+
+.mTop2 {
+  margin-top: 100px;
 }
 
 .contenedor1 {

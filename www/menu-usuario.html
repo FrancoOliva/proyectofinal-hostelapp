@@ -20,23 +20,35 @@
     
     <div class="page-content centrarContenido">
 
+
         <div class="block">
-            <p>¿Qué quieres hacer primero?</p>
+            <div class="separador1">
+                <h4>¿Qué quieres hacer primero?</h4>
+            </div>          
 
             <!-- Menú Admin  -->
-            <button class="col button button-outline botones" id="btnHabitaciones">Ver habitaciones</button>            
-            <button class="col button button-outline botones" id="btnRegistrarCliente">Registrar clientes</button>
-            <button class="col button button-outline botones" id="bc_cliente">Buscar clientes</button>            
-            <button class="col button button-outline botones" id="rp_cliente">Registrar un pago</button>
-            <button class="col button button-outline botones" id="registrarGastoUsuario">Registrar un gasto</button>
-            <button class="col button button-outline botones popup-open" id="btnReporteDiario" data-popup=".popup-usuarioReporte">Generar reporte</button>
-            <button class="col button button-outline botones" id="btnCerrarSesion">Cerrar sesión</button>
+            <div class="separador2">
+                <button class="col button button-outline botones separador1" id="bc_cliente">Buscar clientes</button>
+                <button class="col button button-outline botones separador1" id="btnHabitaciones">Ver habitaciones</button>
+            </div>
+
+            <div class="separador2">
+                <button class="col button button-outline botones separador1" id="btnRegistrarCliente">Registrar clientes</button>                        
+                <button class="col button button-outline botones separador1" id="rp_cliente">Registrar un pago</button>
+                <button class="col button button-outline botones separador1" id="registrarGastoUsuario">Registrar un gasto</button>
+            </div>
+
+            <div class="separador2">
+                <button class="col button button-outline botones popup-open separador1" id="btnReporteDiario" data-popup=".popup-usuarioReporte">Generar reporte</button>
+            </div>
+
+            <button class="col button button-outline botones separador1 mTop2" id="btnCerrarSesion">Cerrar sesión</button>
         </div>
 
         <div class="popup popup-usuarioReporte">
             <div class="block">
                   
-                <p>Reporte Diario</p>
+                <h4>Reporte Diario</h4>
                 <p>En esta ventana podemos ver cuánta plata se recaudó, en qué se gastó o cuántos clientes se registraron en el día.</p>
                   
                 <div>
