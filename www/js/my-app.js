@@ -578,11 +578,11 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
         var password = $$('#crearPass').val();
         var perfil = $$('#crearPerfil').val();
 
-        console.log(email);
-        console.log(password);
-        console.log(perfil);
 
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        if (email == "" && password == "" && perfil == ""){
+            console.log("Falta información, completar todos los campos.");
+        } else {
+            firebase.auth().createUserWithEmailAndPassword(email, password)
           .then((user) => {
             console.log('Usuario creado correctamente!');
             
@@ -627,6 +627,7 @@ $$(document).on('page:init', '.page[data-name="crear-usuario"]', function (e) {
             var errorMessage = error.message;
             // ..
           });
+        }
 
     });
 
@@ -649,7 +650,10 @@ $$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
         var id = $$('#ddbUsuario').val();
         var act_perfil = $$('#ddbPerfil').val();
 
-        coleccion_usuarios.doc(id).update
+        if(id == "" && act_perfil == ""){
+            console.log("Completar todos los campos para dar de baja a un usuario.");
+        } else {
+            coleccion_usuarios.doc(id).update
             ({ perfil: act_perfil })
             .then(function() {
 
@@ -672,6 +676,7 @@ $$(document).on('page:init', '.page[data-name="dar-de-baja"]', function (e) {
             ruta2 = "/menu-admin/"
 
             mainView.router.navigate('/avisos-usuario/');
+        }
 
     });
 
@@ -695,11 +700,15 @@ $$(document).on('page:init', '.page[data-name="registrar-cliente"]', function (e
         var dni_pasaporteCliente = $$('#c_dnipasaporte').val();
         var fNacimientoCliente = $$('#c_fNacimiento').val();
         var paisCliente = $$('#c_pais').val();
-        var ocupacionCliente = $$('#c_ocupación').val();
+        var ocupacionCliente = $$('#c_ocupación').val(); // opcional
         var emailCliente = $$('#c_email').val();
         var fRegistroCliente = $$('#c_fIngreso').val();
 
-        var data = {
+        if (nombreCliente == "" && apellidoCliente == "" && dni_pasaporteCliente == ""
+            && paisCliente == "" && emailCliente == "" && fRegistroCliente == ""){
+            console.log("Falta información. No puede cargarse cliente.");
+        } else {
+            var data = {
         nombre: nombreCliente,
         apellido: apellidoCliente,
         dni_pasaporte: dni_pasaporteCliente,
@@ -739,6 +748,7 @@ $$(document).on('page:init', '.page[data-name="registrar-cliente"]', function (e
             ruta2 = "/menu-usuario/"
 
             mainView.router.navigate('/avisos-usuario/');
+        }
         }
 
     });
@@ -960,7 +970,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
             } else {
                 
-                // no hacer nada
+                console.log("Como no se ingresaron datos, cerramos popup sin hacer nada.");// no hacer nada
             }
 
             // volvemos a false la variable estaOcupada
@@ -1036,6 +1046,7 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
 
 })  
 
+// captura el ID de la cama seleccionada
 function capturarIDcama(id){
     console.log(id);
 }
@@ -1109,7 +1120,10 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
         var importe         = $$('#rp_importe').val();
         var formaDePago     = $$('#rp_fdPago').val();
 
-        // objeto JSON con los datos que vamos a guardar en la base de datos
+        if(nombre == "" && apellido == "" && fechaIngreso == "" && fechaPartida == "" && importe == "" && formaDePago == ""){
+            console.log("Información faltante. No puede registrarse pago.");
+        } else {
+            // objeto JSON con los datos que vamos a guardar en la base de datos
         var data = {
             nombre: nombre,
             apellido: apellido,
@@ -1147,6 +1161,7 @@ $$(document).on('page:init', '.page[data-name="registrar-pago"]', function (e) {
             }
 
             mainView.router.navigate('/avisos-usuario/');
+        }
 
    
     });
@@ -1186,7 +1201,11 @@ $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) 
             importe     = $$('#rg_importe').val();
             fecha       = $$('#rg_fecha').val();
             
-            // creamos un objeto JSON con la información del gasto realizado
+            if ((nombre == "") && (motivo == "") && (importe == "") && (fecha == "")){
+               console.log("No se puede cargar un dato sin información.");
+            } else {
+                
+                // creamos un objeto JSON con la información del gasto realizado
             var data = {
                 nombre: nombre,
                 motivo: motivo,
@@ -1221,6 +1240,7 @@ $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) 
                 }
                 
                 mainView.router.navigate('/avisos-usuario/');
+            }
             
             
             
