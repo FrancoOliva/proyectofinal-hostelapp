@@ -831,8 +831,8 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                             
 
                 '<div class="row">' +
-                '<button class="col-50 button button-outline popup-open modificar" data-popup=".popup-about">Modificar</button>' +
-                '<button class="col-50 button button-outline" id="btnLiberarCama">Liberar Cama</button>' +
+                '<button class="col-50 button button-fill popup-open modificar" data-popup=".popup-about">Modificar</button>' +
+                '<button class="col-50 button button-fill" id="btnLiberarCama">Liberar Cama</button>' +
                 '</div>' +
 
                 '</div>' +
@@ -864,8 +864,8 @@ $$(document).on('page:init', '.page[data-name="habitaciones"]', function (e) {
                             
 
                 '<div class="row">' +
-                '<button class="col-50 button button-outline popup-open modificar" data-popup=".popup-about">Modificar</button>' +
-                '<button class="col-50 button button-outline" id="btnLiberarCama">Liberar Cama</button>' +
+                '<button class="col-50 button button-fill popup-open modificar" data-popup=".popup-about">Modificar</button>' +
+                '<button class="col-50 button button-fill" id="btnLiberarCama">Liberar Cama</button>' +
                 '</div>' +
 
                 '</div>' +
@@ -1209,7 +1209,7 @@ $$(document).on('page:init', '.page[data-name="registrar-gasto"]', function (e) 
             // mensajes correspondientes a la página /avisos-usuario/
                 texto1 = "Gasto registrado";
                 texto2 = "Los datos del gasto fueron guardados correctamente.";
-                btn1 = "Registrar gasto";
+                btn1 = "Otro gasto";
                 btn2 = "Menú Principal";
                 
                 if (perfil == "admin"){
