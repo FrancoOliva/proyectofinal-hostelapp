@@ -3,7 +3,7 @@ HOSTEL APP
 Cuando estaba de viaje tuve la oportunidad de ser voluntario en un hostel. En este hostel, el proceso de registro de clientes, 
 pagos y gastos, era todo mediante planillas, no utilizaban computadoras ni nada.
 
-HOSTEL APP es mi primer aplicación y permite:<br>
+HOSTEL APP es mi primer aplicación y permite:
 0 - Conectarse con perfiles: "usuario o admin" los cuales tienen permisos diferentes.
 1 - Crear usuarios o darlos de baja si sos ADMINISTRADOR.
 2 - Registrar clientes.
