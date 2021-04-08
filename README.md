@@ -12,6 +12,8 @@ Cuando estaba de viaje tuve la oportunidad de trabajar en un hostel. En este hos
 
 5 - Buscar clientes para saber en qué cama o habitación están.
 
+Me llevo casi 75 hs desarrollar Hostel App.
+
 
 **IMPORTATE**: Al abrir el proyecto en tu explorador, tenés que hacer click derecho, darle a **INSPECCIONAR** y tocar la opción **TOGGLE **DEVICE **TOOLBAR**.
 
